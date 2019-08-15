@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -8,8 +9,6 @@ app.get('/api/test', (request, response) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-    const path = require('path');
-
     // Express will serve up production static assets
     app.use(express.static('client/build'));
 
