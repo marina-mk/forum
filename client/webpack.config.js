@@ -25,6 +25,13 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ]
+      },
+      {
+        test: /\.jpg$/,
+        loader: "file-loader",
+        options: {
+          outputPath: './images'
+        }
       }
     ]
   },

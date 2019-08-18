@@ -1,4 +1,11 @@
 $theme-colors: (
-  "primary": #0074d9,
-  "danger": red
+  "primary": #D0F2DA
 );
+
+#root {
+  background-color: #262A2E;
+}
+
+#collapsibleNavbar {
+  justify-content: flex-end;
+}
