@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -45,6 +47,25 @@ module.exports = {
         test: /font-awesome\.config\.js/,
         use: [{ loader: 'style-loader' }, { loader: 'font-awesome-loader' }]
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          warnings: false,
+          parse: {},
+          compress: {},
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+          output: {
+            comments: false
+          }
+        }
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
