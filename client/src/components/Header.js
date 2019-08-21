@@ -4,29 +4,29 @@ import headImage from "../images/head_img.jpg";
 const Header = () => {
   return (
     <header>
-      <img src={headImage} class="img-fluid" />
+      <img src={headImage} className="img-fluid" alt="Forum header" />
 
-      <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <a class="navbar-brand" href="https://lit-ocean-46169.herokuapp.com">
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+        <a className="navbar-brand" href="https://lit-ocean-46169.herokuapp.com">
           Форум
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#collapsibleNavbar"
         >
-          <span class="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon" />
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+        <div className="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Вход
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Регистрация
               </a>
             </li>

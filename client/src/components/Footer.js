@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="footer bg-dark text-white-50">
-      <div class="text-center py-3">
+    <footer className="footer bg-dark text-white-50">
+      <div className="text-center py-3">
         <span>© 2019 Разработано</span>
-        <a class="text-white-50" href="https://github.com/marina-mk/">
-          <i class="fa fa-lg fa-github ml-3 mr-1"></i>
+        <a className="text-white-50" href="https://github.com/marina-mk/">
+          <i className="fa fa-lg fa-github ml-3 mr-1"></i>
           <span>marina-mk</span>
         </a>
       </div>
