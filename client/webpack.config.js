@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -8,7 +9,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "build.js"
+    filename: "[name].[contenthash].bundle.js"
   },
   module: {
     rules: [
@@ -66,7 +67,16 @@ module.exports = {
         }
       }),
       new OptimizeCSSAssetsPlugin({})
-    ]
+    ],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'initial'
+        }
+      }
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -74,8 +84,9 @@ module.exports = {
       filename: "./index.html"
     }),
     new MiniCssExtractPlugin({
-      filename: './build.css',
-    })
+      filename: '[name].[contenthash].css'
+    }),
+    new webpack.HashedModuleIdsPlugin()
   ],
   mode: "development"
 };
