@@ -1,4 +1,5 @@
 package-lock.json
 node_modules/
 dist/
+config/dev.js
 yarn.lock
