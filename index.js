@@ -1,21 +1,34 @@
-const express = require('express');
-const path = require('path');
-const keys = require('./config/keys');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const bodyParser = require("body-parser");
+const keys = require("./config/keys");
+
+mongoose.connect(keys.mongoURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get('/api/test', (request, response) => {
-    response.send({ test: 'Test' });
+app.use(bodyParser.json()); // for parsing application/json
+
+app.get("/api/test", (request, response) => {
+    response.send({ test: "Test" });
 });
 
-if (process.env.NODE_ENV === 'production') {
+require("./routes/authRoutes")(app);
+
+if (process.env.NODE_ENV === "production") {
     // Express will serve up production static assets
-    app.use(express.static('client/dist'));
+    app.use(express.static("client/dist"));
 
     // Express will serve up the index.html file if it doesn't recognize the route
-    app.get('*', (request, response) => {
-        response.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+    app.get("*", (request, response) => {
+        response.sendFile(
+            path.resolve(__dirname, "client", "dist", "index.html")
+        );
     });
 }
 
