@@ -6,7 +6,6 @@ export const EmailInput = () => (
     type="email"
     className="form-control my-3"
     placeholder="Email-адрес"
-    autoComplete="username"
   />
 );
 
@@ -16,7 +15,7 @@ export const PasswordInput = () => (
     type="password"
     className="form-control my-3"
     placeholder="Пароль"
-    autoComplete="new-password"
+    autoComplete="off"
   />
 );
 

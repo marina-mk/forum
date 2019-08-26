@@ -1,32 +1,44 @@
-$base-color: #a9b3ba;
-$dark-base-color: #262A2E;
 $secondary: #6c757d;
+$base-color: #39434d;
+$dark-base-color: #262A2E;
+$light: #d5d8db;
+$highlight: #17a2b8;
 
 #root {
-  .bg-base {
+  .bg-base-color {
     background-color: $base-color;
   }
 
-  background-color: $dark-base-color;
+  button:focus {
+    outline-color: $highlight;
+  }
 
-  .modal-buttons {
+  .modal-header {
+    border-bottom: 1px solid $dark-base-color;
+  }
+
+  .modal-body div {
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
 
-  .modal-buttons > :not(:last-child) {
+  .modal-body div > :not(:last-child) {
     margin-right: 1rem;
   }
 
   .form-control {
-    border-color: $secondary;
+    color: $light;
+    background-color: $dark-base-color;
+    border-color: $dark-base-color;
   }
 
   .form-control:focus {
-    border-color: $secondary;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $secondary;
+    border-color: $highlight;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $dark-base-color;
   }
+
+  background-color: $dark-base-color;
 }
 
 #collapsibleNavbar {
