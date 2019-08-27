@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.4.1",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
