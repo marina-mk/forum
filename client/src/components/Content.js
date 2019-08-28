@@ -1,20 +1,21 @@
 import React from "react";
-import ModalDialog from "./modals/ModalDialog";
-import { EmailInput, PasswordInput, UsernameInput } from "./modals/ModalInput";
+import { LoginDialog, RegisterDialog } from "./modals/AuthDialog";
+import { EmailInput, PasswordInput, UsernameInput } from "./modals/AuthInput";
 
 const Content = () => {
   return (
     <div className="container" style={{ height: "1200px" }}>
-      <ModalDialog
+      <LoginDialog
         modalId="loginModal"
         modalLabelId="loginModalLabel"
         modalTitle="Вход"
-        completeButtonLabel="Войти">
+        completeButtonLabel="Войти"
+        action="/api/login">
         <EmailInput />
         <PasswordInput />
-      </ModalDialog>
+      </LoginDialog>
 
-      <ModalDialog
+      <RegisterDialog
         modalId="registrationModal"
         modalLabelId="registrationModalLabel"
         modalTitle="Регистрация"
@@ -23,7 +24,7 @@ const Content = () => {
         <UsernameInput />
         <EmailInput />
         <PasswordInput />
-      </ModalDialog>
+      </RegisterDialog>
     </div>
   );
 };

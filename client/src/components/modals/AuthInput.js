@@ -1,7 +1,9 @@
 import React from "react";
+import { Field } from 'redux-form';
 
 export const EmailInput = () => (
-  <input
+  <Field
+    component="input"
     name="email"
     type="email"
     className="form-control my-3"
@@ -10,7 +12,8 @@ export const EmailInput = () => (
 );
 
 export const PasswordInput = () => (
-  <input
+  <Field
+    component="input"
     name="password"
     type="password"
     className="form-control my-3"
@@ -20,8 +23,9 @@ export const PasswordInput = () => (
 );
 
 export const UsernameInput = () => (
-  <input
-    name="username"
+  <Field
+    component="input"
+    name="name"
     type="text"
     className="form-control my-3"
     placeholder="Имя пользователя"
