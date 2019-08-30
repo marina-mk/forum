@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 
 function closeMobileMenu(event) {
   const COLLAPSIBLE_ID = "#collapsibleNavbar";
@@ -14,4 +14,4 @@ function closeMobileMenu(event) {
 }
 
 $(window).scroll(closeMobileMenu);
-$('#root').click(closeMobileMenu);
+$("#root").click(closeMobileMenu);

@@ -1,26 +1,19 @@
 {
-    "env": {
-        "es6": true
-    },
-    "extends": [
-        "react-app",
-        "plugin:jsx-a11y/recommended"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "jsx-a11y"
-    ],
-    "rules": {
-    }
+  "env": { "es6": true },
+  "extends": ["airbnb", "react-app", "plugin:jsx-a11y/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": { "jsx": true },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jsx-a11y"],
+  "rules": {
+    "indent": ["error", 2],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
 }
