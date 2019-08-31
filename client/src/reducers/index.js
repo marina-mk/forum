@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import { RESET_REGISTER_FORM_DATA, RESET_LOGIN_FORM_DATA } from "../actions/types";
+import * as types from "../actions/types";
 import userReducer from "./userReducer";
 
 export default combineReducers({
@@ -9,7 +9,9 @@ export default combineReducers({
   form: formReducer.plugin({
     registerForm: (state, action) => {
       switch (action.type) {
-        case RESET_REGISTER_FORM_DATA:
+        case types.SET_OPENED_REGISTER_FORM_DATA:
+          return { ...state, isOpened: true };
+        case types.RESET_REGISTER_FORM_DATA:
           return undefined;
         default:
           return state;
@@ -17,7 +19,9 @@ export default combineReducers({
     },
     loginForm: (state, action) => {
       switch (action.type) {
-        case RESET_LOGIN_FORM_DATA:
+        case types.SET_OPENED_LOGIN_FORM_DATA:
+          return { ...state, isOpened: true };
+        case types.RESET_LOGIN_FORM_DATA:
           return undefined;
         default:
           return state;

@@ -4,24 +4,12 @@ import { EmailInput, PasswordInput, UsernameInput } from "./modals/AuthInput";
 
 const Content = () => (
   <div className="container" style={{ height: "1200px" }}>
-    <LoginDialog
-      modalId="loginModal"
-      modalLabelId="loginModalLabel"
-      modalTitle="Вход"
-      completeButtonLabel="Войти"
-      action="/api/login"
-    >
+    <LoginDialog modalLabelId="loginModalLabel" modalTitle="Вход" completeButtonLabel="Войти" action="/api/login">
       <EmailInput />
       <PasswordInput />
     </LoginDialog>
 
-    <RegisterDialog
-      modalId="registrationModal"
-      modalLabelId="registrationModalLabel"
-      modalTitle="Регистрация"
-      completeButtonLabel="Зарегистрироваться"
-      action="/api/register"
-    >
+    <RegisterDialog modalLabelId="registrationModalLabel" modalTitle="Регистрация" completeButtonLabel="Зарегистрироваться" action="/api/register">
       <UsernameInput />
       <EmailInput />
       <PasswordInput />

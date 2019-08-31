@@ -2,7 +2,7 @@
 import axios from "axios";
 import * as types from "./types";
 
-export const submitAuthData = (values, path, history) => async (dispatch) => {
+export const submitAuthData = (values, path) => async (dispatch) => {
   const response = await axios.post(path, values);
 
   if (response.status === 200) {
