@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { reduxForm } from "redux-form";
-import { connect } from "react-redux";
-import { submitAuthData } from "../../actions";
 
 const AuthDialog = ({
   modalLabelId, modalTitle, completeButtonLabel, isOpened, children,
   // eslint-disable-next-line no-shadow
-  handleSubmit, submitAuthData, action,
+  handleSubmit, submitAuthData, action, closeForm,
 }) => {
   useEffect(() => {
     if (isOpened) {
@@ -17,7 +14,7 @@ const AuthDialog = ({
     } else {
       document.body.removeChild(document.body.lastChild);
     }
-  });
+  }, [isOpened]);
 
   return (
     <div
@@ -29,7 +26,7 @@ const AuthDialog = ({
         <div className="modal-content bg-base-color">
           <div className="modal-header bg-dark text-muted">
             <h5 className="modal-title" id={modalLabelId}>{modalTitle}</h5>
-            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" className="close" aria-label="Close" onClick={closeForm}>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -37,7 +34,7 @@ const AuthDialog = ({
             <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} autoComplete="off" noValidate>
               {children}
               <div>
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" className="btn btn-secondary" onClick={closeForm}>Закрыть</button>
                 <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
               </div>
             </form>
@@ -61,20 +58,7 @@ AuthDialog.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitAuthData: PropTypes.func.isRequired,
   action: PropTypes.string.isRequired,
+  closeForm: PropTypes.func.isRequired,
 };
 
-const loginMapStateToProps = ({ form }) => ({
-  isOpened: form.loginForm ? form.loginForm.isOpened : false,
-});
-
-const registerMapStateToProps = ({ form }) => ({
-  isOpened: form.loginForm ? form.registerForm.isOpened : false,
-});
-
-export const LoginDialog = reduxForm({ form: "loginForm" })(
-  connect(loginMapStateToProps, { submitAuthData })(AuthDialog),
-);
-
-export const RegisterDialog = reduxForm({ form: "registerForm" })(
-  connect(registerMapStateToProps, { submitAuthData })(AuthDialog),
-);
+export default AuthDialog;

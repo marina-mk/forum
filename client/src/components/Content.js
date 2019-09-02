@@ -1,5 +1,6 @@
 import React from "react";
-import { LoginDialog, RegisterDialog } from "./modals/AuthDialog";
+import LoginDialog from "./modals/LoginDialog";
+import RegisterDialog from "./modals/RegisterDialog";
 import { EmailInput, PasswordInput, UsernameInput } from "./modals/AuthInput";
 
 const Content = () => (

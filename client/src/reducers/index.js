@@ -11,7 +11,7 @@ export default combineReducers({
       switch (action.type) {
         case types.SET_OPENED_REGISTER_FORM_DATA:
           return { ...state, isOpened: true };
-        case types.RESET_REGISTER_FORM_DATA:
+        case types.SET_CLOSED_REGISTER_FORM_DATA:
           return undefined;
         default:
           return state;
@@ -21,7 +21,7 @@ export default combineReducers({
       switch (action.type) {
         case types.SET_OPENED_LOGIN_FORM_DATA:
           return { ...state, isOpened: true };
-        case types.RESET_LOGIN_FORM_DATA:
+        case types.SET_CLOSED_LOGIN_FORM_DATA:
           return undefined;
         default:
           return state;
