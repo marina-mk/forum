@@ -23,7 +23,7 @@ $highlight: #17a2b8;
     justify-content: flex-end;
   }
 
-  .modal-body div > :not(:last-child) {
+  .modal-body button:first-child {
     margin-right: 1rem;
   }
 
