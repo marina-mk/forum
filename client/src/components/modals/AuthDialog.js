@@ -1,26 +1,41 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { createPortal } from "react-dom";
 
-const AuthDialog = ({
-  modalLabelId, modalTitle, completeButtonLabel, isOpened, children,
-  // eslint-disable-next-line no-shadow
-  handleSubmit, submitAuthData, action, closeForm,
-}) => {
+const BackdropFadePortal = ({ isOpened }) => {
+  const modalBackdropEl = document.createElement("div");
+  modalBackdropEl.className = "modal-backdrop fade show";
+
   useEffect(() => {
     if (isOpened) {
-      const modalBackdrop = document.createElement("div");
-      modalBackdrop.setAttribute("class", "modal-backdrop fade show");
-      document.body.appendChild(modalBackdrop);
+      document.body.appendChild(modalBackdropEl);
     } else {
       document.body.removeChild(document.body.lastChild);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpened]);
+
+  return createPortal(modalBackdropEl.current, document.body);
+};
+
+const AuthDialog = ({
+  modalLabelId, modalTitle, completeButtonLabel, isOpened, children,
+  handleSubmit, submitAuthData, action, closeForm,
+}) => {
+  const handleOnPortalClick = (e) => {
+    if (e.target.className === "modal fade show") {
+      closeForm();
+    }
+  };
 
   return (
     <div
       className={`modal fade ${isOpened ? "show" : ""}`}
       style={{ display: `${isOpened ? "block" : "none"}` }}
       aria-labelledby={modalLabelId}
+      onClick={handleOnPortalClick}
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content bg-base-color">
@@ -41,6 +56,7 @@ const AuthDialog = ({
           </div>
         </div>
       </div>
+      <BackdropFadePortal isOpened={isOpened} />
     </div>
   );
 };
