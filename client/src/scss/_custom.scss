@@ -9,6 +9,10 @@ $highlight: #17a2b8;
     background-color: $base-color;
   }
 
+  .text-light {
+    color: $light;
+  }
+
   button:focus {
     outline-color: $highlight;
   }
@@ -17,7 +21,7 @@ $highlight: #17a2b8;
     border-bottom: 1px solid $dark-base-color;
   }
 
-  .modal-body div {
+  .modal-body div:last-child {
     display: flex;
     align-items: center;
     justify-content: flex-end;

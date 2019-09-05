@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { FETCH_USER_DATA, SET_CLOSED_REGISTER_FORM_DATA } from "../../../../actions/types";
 import AuthDialog from "../AuthDialog";
-
-const mapStateToProps = ({ form }) => ({
-  isOpened: form.registerForm ? form.registerForm.isOpened : false,
-});
+import fields from "./fields";
+import validateAuth from "../validateAuth";
 
 const submitAuthData = (values, path) => async (dispatch) => {
   const response = await axios.post(path, values);
@@ -21,6 +19,13 @@ const closeForm = () => (dispatch) => {
   dispatch({ type: SET_CLOSED_REGISTER_FORM_DATA });
 };
 
-export default reduxForm({ form: "registerForm" })(
-  connect(mapStateToProps, { submitAuthData, closeForm })(AuthDialog),
-);
+const mapStateToProps = ({ form }) => ({
+  isOpened: form.registerForm ? form.registerForm.isOpened : false,
+});
+
+const mapDispatchToProps = { submitAuthData, closeForm };
+
+export default reduxForm({
+  validate: (values) => validateAuth(fields, values),
+  form: "registerForm",
+})(connect(mapStateToProps, mapDispatchToProps)(AuthDialog));

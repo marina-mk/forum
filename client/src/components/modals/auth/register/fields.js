@@ -8,4 +8,7 @@ export default [
   {
     id: "password", name: "password", type: "password", placeholder: "Введите пароль",
   },
+  {
+    id: "confirm_password", name: "confirmPassword", type: "password", placeholder: "Повторите пароль",
+  },
 ];

@@ -1,6 +1,6 @@
 export default [
   {
-    id: "email", name: "email", type: "email", placeholder: "Email-адрес",
+    id: "name", name: "name", type: "text", placeholder: "Имя пользователя или email-адрес",
   },
   {
     id: "password", name: "password", type: "password", placeholder: "Пароль",

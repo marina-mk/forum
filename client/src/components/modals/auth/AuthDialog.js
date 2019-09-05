@@ -12,12 +12,11 @@ const handleOnPortalClick = (event, onClick) => {
   }
 };
 
-const renderFields = (fields, modalId) => fields.map(({
+const renderFields = (fields) => fields.map(({
   id, name, type, placeholder,
 }) => (
   <Field
-    id={`${id}_${modalId}`}
-    key={`${id}_${modalId}`}
+    key={id}
     component={AuthField}
     name={name}
     type={type}
@@ -45,7 +44,7 @@ const AuthDialog = ({
         </div>
         <div className="modal-body">
           <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} autoComplete="off" noValidate>
-            {renderFields(fields, modalId)}
+            {renderFields(fields)}
             <div>
               <button type="button" className="btn btn-secondary" onClick={closeForm}>Закрыть</button>
               <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
