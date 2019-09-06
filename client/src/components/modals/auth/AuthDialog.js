@@ -39,7 +39,6 @@ const AuthDialog = ({
           <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} autoComplete="off" noValidate>
             {renderFields(fields)}
             <div>
-              <button type="button" className="btn btn-secondary" onClick={closeForm}>Закрыть</button>
               <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
             </div>
           </form>
