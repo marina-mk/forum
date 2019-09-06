@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
@@ -12,16 +13,8 @@ const handleOnPortalClick = (event, onClick) => {
   }
 };
 
-const renderFields = (fields) => fields.map(({
-  id, name, type, placeholder,
-}) => (
-  <Field
-    key={id}
-    component={AuthField}
-    name={name}
-    type={type}
-    placeholder={placeholder}
-  />
+const renderFields = (fields) => fields.map(({ name, type, placeholder }, i) => (
+  <Field key={i} component={AuthField} name={name} type={type} placeholder={placeholder} />
 ));
 
 const AuthDialog = ({

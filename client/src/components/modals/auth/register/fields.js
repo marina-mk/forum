@@ -1,14 +1,14 @@
 export default [
   {
-    id: "name", name: "name", type: "text", placeholder: "Имя пользователя",
+    name: "name", type: "text", placeholder: "Имя пользователя",
   },
   {
-    id: "email", name: "email", type: "email", placeholder: "Email-адрес",
+    name: "email", type: "email", placeholder: "Email-адрес",
   },
   {
-    id: "password", name: "password", type: "password", placeholder: "Введите пароль",
+    name: "password", type: "password", placeholder: "Введите пароль",
   },
   {
-    id: "confirm_password", name: "confirmPassword", type: "password", placeholder: "Повторите пароль",
+    name: "confirmPassword", type: "password", placeholder: "Повторите пароль",
   },
 ];
