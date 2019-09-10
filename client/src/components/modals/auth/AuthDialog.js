@@ -19,7 +19,7 @@ const renderFields = (fields) => fields.map(({ name, type, placeholder }, i) => 
 
 const AuthDialog = ({
   fields, modalId, modalTitle, completeButtonLabel, isOpened,
-  handleSubmit, submitAuthData, action, closeForm,
+  error, handleSubmit, submitAuthData, action, closeForm,
 }) => (
   <div
     className={`modal fade ${isOpened ? "show" : ""}`}
@@ -38,6 +38,9 @@ const AuthDialog = ({
         <div className="modal-body">
           <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} autoComplete="off" noValidate>
             {renderFields(fields)}
+            <div className="mb-4">
+              <small className="form-text text-light">{error}</small>
+            </div>
             <div>
               <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
             </div>
@@ -51,6 +54,7 @@ const AuthDialog = ({
 
 AuthDialog.defaultProps = {
   isOpened: false,
+  error: null,
 };
 
 AuthDialog.propTypes = {
@@ -59,6 +63,7 @@ AuthDialog.propTypes = {
   modalTitle: PropTypes.string.isRequired,
   completeButtonLabel: PropTypes.string.isRequired,
   isOpened: PropTypes.bool,
+  error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   submitAuthData: PropTypes.func.isRequired,
   action: PropTypes.string.isRequired,
