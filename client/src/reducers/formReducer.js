@@ -23,6 +23,8 @@ export default formReducer.plugin({
         return { ...state, isOpened: true };
       case types.SET_CLOSED_LOGIN_FORM_DATA:
         return loginFormInitialState;
+      case types.SET_ERROR_LOGIN_FORM_DATA:
+          return { ...state, error: action.payload };
       default:
         return state;
     }

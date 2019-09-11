@@ -25,4 +25,8 @@ userSchema.pre("save", function pre(next) {
     }
 });
 
+userSchema.methods.isPasswordCorrect = function isPasswordCorrect(password, callback) {
+    bcrypt.compare(password, this.password, callback);
+};
+
 mongoose.model("users", userSchema);
