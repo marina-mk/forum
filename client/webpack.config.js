@@ -65,7 +65,7 @@ module.exports = {
           },
         },
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}),
     ],
     splitChunks: {
       cacheGroups: {
