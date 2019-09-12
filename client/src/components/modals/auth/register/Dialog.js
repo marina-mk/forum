@@ -10,9 +10,6 @@ const submitAuthData = (values, path) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({ type: types.FETCH_USER_DATA, payload: response.data });
       dispatch({ type: types.SET_CLOSED_REGISTER_FORM_DATA });
-    } else {
-      const error = new Error(response.error);
-      throw error;
     }
   }).catch((error) => {
     dispatch({ type: types.SET_ERROR_REGISTER_FORM_DATA, payload: error.response.data });
