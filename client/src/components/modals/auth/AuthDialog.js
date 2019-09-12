@@ -36,7 +36,7 @@ const AuthDialog = ({
           </button>
         </div>
         <div className="modal-body">
-          <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} autoComplete="off" noValidate>
+          <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} noValidate>
             {renderFields(fields)}
             <div className="mb-4">
               <small className="form-text text-light">{error}</small>
