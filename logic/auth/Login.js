@@ -1,14 +1,9 @@
-require("../../models/User");
 const mongoose = require("mongoose");
+const Auth = require("./Auth");
 
 const User = mongoose.model("users");
 
-class Login {
-    constructor(request, response) {
-        this.data = request.body;
-        this.response = response;
-    }
-
+class Login extends Auth {
     checkPassword(user) {
         const { password } = this.data;
 
@@ -18,7 +13,7 @@ class Login {
             } else if (!isSame) {
                 this.response.status(401).send("Неверные имя пользователя, email-адрес или пароль.");
             } else {
-                this.response.send(user);
+                this.sendWebtoken(user);
             }
         });
     }

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const keys = require("./config/keys");
 
 mongoose.connect(keys.mongoURI, {
@@ -13,6 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json()); // for parsing application/json
+app.use(cookieParser()); // for parsing cookies passed by our browser:
 
 app.get("/api/test", (request, response) => {
     response.send({ test: "Test" });

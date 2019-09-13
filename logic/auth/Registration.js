@@ -1,14 +1,9 @@
-require("../../models/User");
 const mongoose = require("mongoose");
+const Auth = require("./Auth");
 
 const User = mongoose.model("users");
 
-class Registration {
-    constructor(request, response) {
-        this.data = request.body;
-        this.response = response;
-    }
-
+class Registration extends Auth {
     checkUsername(next) {
         const { name } = this.data;
 
@@ -45,7 +40,7 @@ class Registration {
             if (error) {
                 this.response.status(500).send("Ошибка во время регистрации. Пожалуйста, повторите попытку позже.");
             } else {
-                this.response.send(user);
+                this.sendWebtoken(user);
                 if (next) next();
             }
         });
