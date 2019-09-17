@@ -6,6 +6,7 @@ class Auth {
         this.request = request;
         this.response = response;
         this.data = request.body;
+        this.webTokenName = "authToken";
     }
 
     sendUserdata(user) {
@@ -14,7 +15,7 @@ class Auth {
 
     sendWebtoken(user) {
         const webtoken = jsonwebtoken.sign({ email: user.email }, keys.authSecretToken, { expiresIn: "1h" });
-        this.response.cookie("token", webtoken, { httpOnly: true });
+        this.response.cookie(this.webTokenName, webtoken, { httpOnly: true });
         this.sendUserdata(user);
     }
 }

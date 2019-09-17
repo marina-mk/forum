@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { logoutUser } from "../../actions";
 import * as types from "../../actions/types";
 
 const HeaderLinks = ({
@@ -32,12 +33,15 @@ HeaderLinks.propTypes = {
   setIsOpenedRegisterForm: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const setIsOpenedLoginForm = () => (dispatch) => {
+  dispatch({ type: types.SET_OPENED_LOGIN_FORM_DATA });
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch({ type: types.DELETE_USER_DATA }),
-  setIsOpenedLoginForm: () => dispatch({ type: types.SET_OPENED_LOGIN_FORM_DATA }),
-  setIsOpenedRegisterForm: () => dispatch({ type: types.SET_OPENED_REGISTER_FORM_DATA }),
-});
+const setIsOpenedRegisterForm = () => (dispatch) => {
+  dispatch({ type: types.SET_OPENED_REGISTER_FORM_DATA });
+};
+
+const mapStateToProps = ({ user }) => ({ user });
+const mapDispatchToProps = { logout: logoutUser, setIsOpenedLoginForm, setIsOpenedRegisterForm };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderLinks);

@@ -7,10 +7,10 @@ const User = mongoose.model("users");
 
 class Authentication extends Auth {
     execute() {
-        const { token } = this.request.cookies;
+        const authToken = this.request.cookies[this.webTokenName];
 
-        if (token) {
-            jsonwebtoken.verify(token, keys.authSecretToken, (error, decoded) => {
+        if (authToken) {
+            jsonwebtoken.verify(authToken, keys.authSecretToken, (error, decoded) => {
                 if (error) {
                     this.response.status(401).send("Unauthorized: Invalid token");
                 } else {

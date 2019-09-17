@@ -1,8 +1,12 @@
 import axios from "axios";
-import { FETCH_USER_DATA } from "./types";
+import * as types from "./types";
 
-// eslint-disable-next-line import/prefer-default-export
 export const fetchUser = () => async (dispatch) => {
   const response = await axios.get("/api/auth");
-  dispatch({ type: FETCH_USER_DATA, payload: response.data });
+  dispatch({ type: types.FETCH_USER_DATA, payload: response.data });
+};
+
+export const logoutUser = () => async (dispatch) => {
+  await axios.delete("/api/logout");
+  dispatch({ type: types.DELETE_USER_DATA });
 };
