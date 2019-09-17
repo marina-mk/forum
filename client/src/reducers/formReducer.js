@@ -1,8 +1,8 @@
 /* eslint-disable indent */
-import { reducer as formReducer } from "redux-form";
-import * as types from "../actions/types";
-import loginFormInitialState from "../components/modals/auth/login/initialState";
-import registerFormInitialState from "../components/modals/auth/register/initialState";
+import { reducer as formReducer } from 'redux-form';
+import * as types from '../actions/types';
+import loginFormInitialState from '../components/modals/auth/login/initialState';
+import registerFormInitialState from '../components/modals/auth/register/initialState';
 
 export default formReducer.plugin({
   registerForm: (state, action) => {

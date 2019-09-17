@@ -17,6 +17,6 @@
     },
     "rules": {
         "indent": ["error", 4],
-        "quotes": ["error", "double", { "allowTemplateLiterals": true }]
+        "quotes": [0, "double", { "allowTemplateLiterals": true }]
     }
 }

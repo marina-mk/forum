@@ -13,7 +13,7 @@
   "plugins": ["react", "jsx-a11y"],
   "rules": {
     "indent": ["error", 2],
-    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "quotes": [0, "double", { "allowTemplateLiterals": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }

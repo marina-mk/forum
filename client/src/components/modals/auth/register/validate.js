@@ -6,20 +6,20 @@ export default (values, { fields }) => {
   const errors = {};
 
   if (!EMAIL_REGEXP.test(values.email)) {
-    errors.email = "Введите корректный email";
+    errors.email = 'Введите корректный email';
   }
 
   if (values.password && values.password.length < MIN_PASSWORD_LENGTH) {
-    errors.password = "Пароль должен содержать как минимум 6 символов";
+    errors.password = 'Пароль должен содержать как минимум 6 символов';
   }
 
   if (values.password !== values.confirmPassword) {
-    errors.confirmPassword = "Пароль и подтверждение пароля не совпадают";
+    errors.confirmPassword = 'Пароль и подтверждение пароля не совпадают';
   }
 
   fields.forEach(({ name }) => {
     if (!values[name]) {
-      errors[name] = "Обязательное поле";
+      errors[name] = 'Обязательное поле';
     }
   });
 

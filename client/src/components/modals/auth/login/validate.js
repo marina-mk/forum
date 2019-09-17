@@ -3,7 +3,7 @@ export default (values, { fields }) => {
 
   fields.forEach(({ name }) => {
     if (!values[name]) {
-      errors[name] = "Обязательное поле";
+      errors[name] = 'Обязательное поле';
     }
   });
 

@@ -1,9 +1,9 @@
-import { reduxForm } from "redux-form";
-import { connect } from "react-redux";
-import axios from "axios";
-import * as types from "../../../../actions/types";
-import AuthDialog from "../AuthDialog";
-import validate from "./validate";
+import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import * as types from '../../../../actions/types';
+import AuthDialog from '../AuthDialog';
+import validate from './validate';
 
 const submitAuthData = (values, path) => async (dispatch) => {
   axios.post(path, values).then((response) => {
@@ -26,4 +26,4 @@ const mapStateToProps = ({ form }) => ({
 
 const mapDispatchToProps = { submitAuthData, closeForm };
 
-export default reduxForm({ validate, form: "registerForm" })(connect(mapStateToProps, mapDispatchToProps)(AuthDialog));
+export default reduxForm({ validate, form: 'registerForm' })(connect(mapStateToProps, mapDispatchToProps)(AuthDialog));

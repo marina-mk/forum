@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export default ({ isOpened }) => {
-  const modalBackdropEl = document.createElement("div");
-  modalBackdropEl.className = "modal-backdrop fade show";
+  const modalBackdropEl = document.createElement('div');
+  modalBackdropEl.className = 'modal-backdrop fade show';
 
   useEffect(() => {
     if (isOpened) {

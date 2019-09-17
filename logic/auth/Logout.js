@@ -1,4 +1,4 @@
-const Auth = require("./Auth");
+const Auth = require('./Auth');
 
 class Logout extends Auth {
     execute() {

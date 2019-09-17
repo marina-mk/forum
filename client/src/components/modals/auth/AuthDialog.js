@@ -1,14 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from "react";
-import PropTypes from "prop-types";
-import { Field } from "redux-form";
-import AuthField from "./AuthField";
-import BackdropFadePortal from "./BackdropFadePortal";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
+import AuthField from './AuthField';
+import BackdropFadePortal from './BackdropFadePortal';
 
 const handleOnPortalClick = (event, onClick) => {
-  if (event.target.className === "modal fade show") {
+  if (event.target.className === 'modal fade show') {
     onClick();
   }
 };
@@ -22,8 +22,8 @@ const AuthDialog = ({
   error, handleSubmit, submitAuthData, action, closeForm,
 }) => (
   <div
-    className={`modal fade ${isOpened ? "show" : ""}`}
-    style={{ display: `${isOpened ? "block" : "none"}` }}
+    className={`modal fade ${isOpened ? 'show' : ''}`}
+    style={{ display: `${isOpened ? 'block' : 'none'}` }}
     aria-labelledby={`${modalId}_label`}
     onClick={(event) => { handleOnPortalClick(event, closeForm); }}
   >

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
 const saltRounds = 10;
@@ -10,8 +10,8 @@ const userSchema = new Schema({
     password: { type: String, required: true },
 });
 
-userSchema.pre("save", function pre(next) {
-    if (this.isNew || this.isModified("password")) {
+userSchema.pre('save', function pre(next) {
+    if (this.isNew || this.isModified('password')) {
         bcrypt.hash(this.password, saltRounds, (err, hashedPassword) => {
             if (err) {
                 next(err);
@@ -29,4 +29,4 @@ userSchema.methods.isPasswordCorrect = function isPasswordCorrect(password, call
     bcrypt.compare(password, this.password, callback);
 };
 
-mongoose.model("users", userSchema);
+mongoose.model('users', userSchema);

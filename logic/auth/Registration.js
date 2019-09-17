@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const Auth = require("./Auth");
+const mongoose = require('mongoose');
+const Auth = require('./Auth');
 
-const User = mongoose.model("users");
+const User = mongoose.model('users');
 
 class Registration extends Auth {
     checkUsername(next) {
@@ -9,9 +9,9 @@ class Registration extends Auth {
 
         User.findOne({ name }, (error, result) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время регистрации. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время регистрации. Пожалуйста, повторите попытку позже.');
             } else if (result) {
-                this.response.status(422).send("Данное имя пользователя используется другим пользователем.");
+                this.response.status(422).send('Данное имя пользователя используется другим пользователем.');
             } else if (next) {
                 next();
             }
@@ -23,9 +23,9 @@ class Registration extends Auth {
 
         User.findOne({ email }, (error, result) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время регистрации. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время регистрации. Пожалуйста, повторите попытку позже.');
             } else if (result) {
-                this.response.status(422).send("Данный email-адрес уже используется.");
+                this.response.status(422).send('Данный email-адрес уже используется.');
             } else if (next) {
                 next();
             }
@@ -38,7 +38,7 @@ class Registration extends Auth {
 
         user.save((error) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время регистрации. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время регистрации. Пожалуйста, повторите попытку позже.');
             } else {
                 this.sendWebtoken(user);
                 if (next) next();

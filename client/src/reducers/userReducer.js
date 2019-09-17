@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { FETCH_USER_DATA, DELETE_USER_DATA } from "../actions/types";
+import { FETCH_USER_DATA, DELETE_USER_DATA } from '../actions/types';
 
 export default (state = null, action) => {
   switch (action.type) {

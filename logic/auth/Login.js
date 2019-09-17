@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const Auth = require("./Auth");
+const mongoose = require('mongoose');
+const Auth = require('./Auth');
 
-const User = mongoose.model("users");
+const User = mongoose.model('users');
 
 class Login extends Auth {
     checkPassword(user) {
@@ -9,9 +9,9 @@ class Login extends Auth {
 
         user.isPasswordCorrect(password, (error, isSame) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время входа. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время входа. Пожалуйста, повторите попытку позже.');
             } else if (!isSame) {
-                this.response.status(401).send("Неверные имя пользователя, email-адрес или пароль.");
+                this.response.status(401).send('Неверные имя пользователя, email-адрес или пароль.');
             } else {
                 this.sendWebtoken(user);
             }
@@ -23,9 +23,9 @@ class Login extends Auth {
 
         User.findOne({ email: name }, (error, user) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время входа. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время входа. Пожалуйста, повторите попытку позже.');
             } else if (!user) {
-                this.response.status(401).send("Неверные имя пользователя, email-адрес или пароль.");
+                this.response.status(401).send('Неверные имя пользователя, email-адрес или пароль.');
             } else {
                 this.checkPassword(user);
             }
@@ -37,7 +37,7 @@ class Login extends Auth {
 
         User.findOne({ name }, (error, user) => {
             if (error) {
-                this.response.status(500).send("Ошибка во время входа. Пожалуйста, повторите попытку позже.");
+                this.response.status(500).send('Ошибка во время входа. Пожалуйста, повторите попытку позже.');
             } else if (!user) {
                 this.checkEmail();
             } else {
