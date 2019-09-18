@@ -13,7 +13,7 @@ const App = ({ fetchUser }) => {
 
   return (
     <BrowserRouter>
-      <div className="container bg-base-color p-0">
+      <div className="container bg-dark p-0">
         <Header />
         <Content />
         <Footer />
