@@ -1,42 +1,45 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-const SectionsTable = () => (
-  <div className="table-responsive">
-    <table className="sections table table-hover table-dark text-light font-size-small">
-      <tbody>
-        <tr>
-          <td className="section-info">
-            <a href="#" className="title">Общие вопросы фотографии</a>
-            <div className="description">Раздел по общим вопросам фотографии. Все, кроме обсуждения фототехники, обработки изображений и других тем.</div>
-          </td>
-          <td className="section-counts">
-            <div>0 тем</div>
-            <div>0 сообщений</div>
-          </td>
-        </tr>
-        <tr>
-          <td className="section-info">
-            <a href="#" className="title">Цифровая обработка изображений</a>
-            <div className="description">Раздел по обработке изображений. Печать, сканирование, монтаж, программное обеспечение, обсуждение принтеров, мониторов, калибровки, цифровой печати, компьютеров для фото и т.д.</div>
-          </td>
-          <td className="section-counts">
-            <div>0 тем</div>
-            <div>0 сообщений</div>
-          </td>
-        </tr>
-        <tr>
-          <td className="section-info">
-            <a href="#" className="title">Студийная съемка и оборудование</a>
-            <div className="description">Тут обсуждаются темы связанные с одной из самых технически сложных методов фотографии - студийной съемкой.</div>
-          </td>
-          <td className="section-counts">
-            <div>0 тем</div>
-            <div>0 сообщений</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+const renderSections = (sections) => sections.map(({ title, description, path }) => (
+  <tr>
+    <td className="section-info">
+      <a href={`/${path}`} className="title">{title}</a>
+      <div className="description">{description}</div>
+    </td>
+    <td className="section-counts">
+      <div>0 тем</div>
+      <div>0 сообщений</div>
+    </td>
+  </tr>
+));
 
-export default SectionsTable;
+const SectionsTable = ({ fetchSections, sections }) => {
+  useEffect(() => { fetchSections(); }, []);
+
+  return (
+    <div className="table-responsive">
+      <table className="sections table table-hover table-dark text-light font-size-small">
+        <tbody>
+          {renderSections(sections)}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+SectionsTable.propTypes = {
+  fetchSections: PropTypes.func.isRequired,
+  sections: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+const mapStateToProps = ({ sections }) => ({ sections });
+
+export default connect(mapStateToProps, actions)(SectionsTable);

@@ -21,6 +21,7 @@ app.get('/api/test', (request, response) => {
 });
 
 require('./routes/authRoutes')(app);
+require('./routes/dataRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production static assets

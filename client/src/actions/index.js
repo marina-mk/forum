@@ -10,3 +10,8 @@ export const logoutUser = () => async (dispatch) => {
   await axios.delete('/api/logout');
   dispatch({ type: types.DELETE_USER_DATA });
 };
+
+export const fetchSections = () => async (dispatch) => {
+  const response = await axios.get('/api/sections');
+  dispatch({ type: types.FETCH_SECTIONS_DATA, payload: response.data });
+};
