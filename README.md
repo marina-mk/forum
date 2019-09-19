@@ -10,9 +10,14 @@ A cross-platform document-oriented database **Mongo** is used to save the data. 
 - **Thunk** middleware for Redux that extends the store's abilities and helps write async logic that interacts with the store.
 - **Redux Form** library to manage your form state in Redux.
 
+**Express** application framework is used for building backend APIs to parses incoming requests with JSON payloads and is based on **body-parser** and **cookie-parser**. Server side authorization was made using **JSON Web Tokens**. It means that once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with authentication token. Also **bcrypt** password hashing function is used to securely store passwords in the database.
+
 ## API Endpoint
 List of available API, e.g. https://lit-ocean-46169.herokuapp.com/api/test
 ```
 /api/test
+/api/auth
 /api/register (method POST)
+/api/login (method POST)
+/api/logout (method DELETE)
 ```
