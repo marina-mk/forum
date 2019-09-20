@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-const renderSections = (sections) => sections.map(({ title, description, path }) => (
-  <tr>
+const renderSections = (sections) => sections.map(({
+  _id, title, description, path,
+}) => (
+  <tr key={_id}>
     <td className="section-info">
       <a href={`/${path}`} className="title">{title}</a>
       <div className="description">{description}</div>
@@ -33,11 +35,11 @@ const SectionsTable = ({ fetchSections, sections }) => {
 
 SectionsTable.propTypes = {
   fetchSections: PropTypes.func.isRequired,
-  sections: PropTypes.shape({
+  sections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = ({ sections }) => ({ sections });
