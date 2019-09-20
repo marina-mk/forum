@@ -4,7 +4,7 @@ import HeaderLinks from './HeaderLinks';
 
 const Header = () => (
   <>
-    <img src={headImage} className="img-fluid" alt="Forum header" />
+    <img id="header_image" src={headImage} className="img-fluid" alt="Forum header" />
 
     <nav className="main navbar navbar-expand-sm bg-base-color navbar-dark sticky-top mx-0 px-3">
       <a className="navbar-brand" href="https://lit-ocean-46169.herokuapp.com">Форум</a>

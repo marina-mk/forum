@@ -13,5 +13,14 @@ function closeMobileMenu(event) {
   }
 }
 
-$(window).scroll(closeMobileMenu);
-$('#root').click(closeMobileMenu);
+function setContainerHeight() {
+  const headerImgHeight = $('#header_image').height() + $('#footer').height() * 2;
+  $('#content_container').attr('style', `min-height:calc(100vh - ${headerImgHeight}px)!important;`);
+}
+
+$(document).ready(() => {
+  $(window).scroll(closeMobileMenu);
+  $('#root').click(closeMobileMenu);
+  $(window).resize(setContainerHeight);
+  $('#header_image').on('load', setContainerHeight);
+});
