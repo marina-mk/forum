@@ -11,6 +11,7 @@ module.exports = (app) => {
             } else if (!sections) {
                 response.status(404).send('Not found sections in the database');
             } else {
+                sections.sort((x, y) => x.index - y.index);
                 response.send(sections);
             }
         });
