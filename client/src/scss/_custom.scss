@@ -6,6 +6,10 @@ $highlight: #17a2b8;
 $highlight-light: #03d3fc;
 $font-size-small: 0.875rem;
 
+body {
+  background-color: $dark-base-color!important;
+}
+
 #root {
   .bg-base-color {
     background-color: $base-color;
