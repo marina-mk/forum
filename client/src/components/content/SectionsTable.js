@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 const renderSections = (sections) => sections.map(({
-  _id, title, description, path,
+  _id, title, description, name,
 }) => (
   <tr key={_id}>
     <td className="section-info">
-      <a href={`/${path}`} className="title">{title}</a>
+      <a href={`/${name}`} className="title">{title}</a>
       <div className="description">{description}</div>
     </td>
     <td className="section-counts">
@@ -38,7 +38,7 @@ SectionsTable.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
   })).isRequired,
 };
 
