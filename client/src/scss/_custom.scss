@@ -60,14 +60,14 @@ body {
     min-height: 100vh;
   }
 
-  table.sections {
+  table.sections, table.topics {
     .title {
       font-size: 1rem;
       color: $highlight;
       text-decoration: none;
     }
 
-    .section-counts {
+    .counts {
       width: 130px;
       color: rgba(255, 255, 255, 0.5);
     }
@@ -77,13 +77,13 @@ body {
         color: $highlight-light;
       }
 
-      .section-counts {
+      .counts {
         color: rgba(255, 255, 255, 0.7);
       }
     }
 
     @media (min-width: 768px) {
-      .section-info {
+      .info {
         padding: 12px 36px;
       }
     }
@@ -94,6 +94,19 @@ body {
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  table.topics {
+    .topicInfo {
+      margin-top: 5px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    tr:hover {
+      .topicInfo {
+        color: rgba(255, 255, 255, 0.7);
       }
     }
   }

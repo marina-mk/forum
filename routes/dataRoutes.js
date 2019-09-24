@@ -55,6 +55,7 @@ module.exports = (app) => {
                         "description": 1,
                         "author.name": 1,
                         "created": 1,
+                        "index": 1,
                     },
                 },
             ]);

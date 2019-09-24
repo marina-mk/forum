@@ -8,11 +8,11 @@ const renderSections = (sections) => sections.map(({
   _id, title, description, name,
 }) => (
   <tr key={_id}>
-    <td className="section-info">
+    <td className="info">
       <a href={`/${name}`} className="title">{title}</a>
       <div className="description">{description}</div>
     </td>
-    <td className="section-counts">
+    <td className="counts">
       <div>0 тем</div>
       <div>0 сообщений</div>
     </td>

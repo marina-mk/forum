@@ -7,3 +7,4 @@ export const SET_OPENED_LOGIN_FORM_DATA = 'set_opened_login_form';
 export const SET_CLOSED_LOGIN_FORM_DATA = 'set_closed_login_form';
 export const SET_ERROR_LOGIN_FORM_DATA = 'set_error_login_form';
 export const FETCH_SECTIONS_DATA = 'fetch_sections';
+export const FETCH_TOPICS_DATA = 'fetch_topics';
