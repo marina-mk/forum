@@ -1,23 +1,41 @@
+/* eslint-disable indent */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
+const createTopicsCountStr = (topicsCount) => {
+  switch (topicsCount % 10) {
+    case 1:
+      return `${topicsCount} тема`;
+    case 2:
+    case 3:
+    case 4:
+      return `${topicsCount} темы`;
+    default:
+      return `${topicsCount} тем`;
+  }
+};
+
 const renderSections = (sections) => sections.map(({
-  _id, title, description, name,
-}) => (
-  <tr key={_id}>
-    <td className="info">
-      <a href={`/${name}`} className="title">{title}</a>
-      <div className="description">{description}</div>
-    </td>
-    <td className="counts">
-      <div>0 тем</div>
-      <div>0 сообщений</div>
-    </td>
-  </tr>
-));
+  _id, title, description, name, topicsCount,
+}) => {
+  const topicsCountStr = createTopicsCountStr(topicsCount);
+
+  return (
+    <tr key={_id}>
+      <td className="info">
+        <a href={`/${name}`} className="title">{title}</a>
+        <div className="description">{description}</div>
+      </td>
+      <td className="counts">
+        <div>{topicsCountStr}</div>
+        <div>0 сообщений</div>
+      </td>
+    </tr>
+  );
+});
 
 const SectionsTable = ({ fetchSections, sections }) => {
   useEffect(() => { fetchSections(); }, []);
@@ -39,6 +57,7 @@ SectionsTable.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    topicsCount: PropTypes.number.isRequired,
   })).isRequired,
 };
 
