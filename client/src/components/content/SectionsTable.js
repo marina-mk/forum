@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 
 const createTopicsCountStr = (topicsCount) => {
@@ -27,7 +28,7 @@ const renderSections = (sections) => sections.map(({
     <tr key={_id}>
       <td>
         <div className="info">
-          <a href={`/${name}`} className="title">{title}</a>
+          <Link to={`/${name}`} className="title">{title}</Link>
           <div className="description">{description}</div>
         </div>
         <div className="counts">

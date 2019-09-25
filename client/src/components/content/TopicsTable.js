@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 
 const renderTopics = (section, topics) => topics.map(({
@@ -14,7 +15,7 @@ const renderTopics = (section, topics) => topics.map(({
     <tr key={_id}>
       <td>
         <div className="info">
-          <a href={`/${section}/${index}`} className="title">{title}</a>
+          <Link to={`/${section}/${index}`} className="title">{title}</Link>
           <div className="description">{description}</div>
           <div className="topicInfo">{topicInfo}</div>
         </div>
