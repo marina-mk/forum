@@ -6,6 +6,7 @@ import loginFields from '../modals/auth/login/fields';
 import registerFields from '../modals/auth/register/fields';
 import SectionsTable from './SectionsTable';
 import TopicsTable from './TopicsTable';
+import Topic from './Topic';
 
 const Content = () => (
   <div id="content_container" className="container px-0">
@@ -25,6 +26,7 @@ const Content = () => (
     />
     <Route exact path="/" component={SectionsTable} />
     <Route exact path="/:section" component={TopicsTable} />
+    <Route exact path="/:section/:topic" component={Topic} />
   </div>
 );
 
