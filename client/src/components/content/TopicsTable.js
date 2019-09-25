@@ -12,14 +12,19 @@ const renderTopics = (section, topics) => topics.map(({
 
   return (
     <tr key={_id}>
-      <td className="info">
-        <a href={`/${section}/${index}`} className="title">{title}</a>
-        <div className="description">{description}</div>
-        <div className="topicInfo">{topicInfo}</div>
-      </td>
-      <td className="counts">
-        <div>0 ответов</div>
-        <div>0 просмотров</div>
+      <td>
+        <div className="info">
+          <a href={`/${section}/${index}`} className="title">{title}</a>
+          <div className="description">{description}</div>
+          <div className="topicInfo">{topicInfo}</div>
+        </div>
+        <div className="counts">
+          <div>
+            <span>0 ответов</span>
+            <span>&nbsp;</span>
+          </div>
+          <div>0 просмотров</div>
+        </div>
       </td>
     </tr>
   );

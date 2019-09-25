@@ -25,13 +25,18 @@ const renderSections = (sections) => sections.map(({
 
   return (
     <tr key={_id}>
-      <td className="info">
-        <a href={`/${name}`} className="title">{title}</a>
-        <div className="description">{description}</div>
-      </td>
-      <td className="counts">
-        <div>{topicsCountStr}</div>
-        <div>0 сообщений</div>
+      <td>
+        <div className="info">
+          <a href={`/${name}`} className="title">{title}</a>
+          <div className="description">{description}</div>
+        </div>
+        <div className="counts">
+          <div>
+            <span>{topicsCountStr}</span>
+            <span>&nbsp;</span>
+          </div>
+          <div>0 сообщений</div>
+        </div>
       </td>
     </tr>
   );
