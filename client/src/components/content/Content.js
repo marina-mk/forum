@@ -7,6 +7,7 @@ import registerFields from '../modals/auth/register/fields';
 import SectionsTable from './SectionsTable';
 import TopicsTable from './TopicsTable';
 import Topic from './Topic';
+import Breadcrumbs from './Breadcrumbs';
 
 const Content = () => (
   <div id="content_container" className="container px-0">
@@ -24,9 +25,30 @@ const Content = () => (
       action="/api/register"
       fields={registerFields}
     />
+
     <Route exact path="/" component={SectionsTable} />
-    <Route exact path="/:section" component={TopicsTable} />
-    <Route exact path="/:section/:topic" component={Topic} />
+
+    <Route
+      exact
+      path="/:section"
+      render={({ match }) => (
+        <>
+          <Breadcrumbs params={match.params} />
+          <TopicsTable section={match.params.section} />
+        </>
+      )}
+    />
+
+    <Route
+      exact
+      path="/:section/:topic"
+      render={({ match }) => (
+        <>
+          <Breadcrumbs params={match.params} />
+          <Topic />
+        </>
+      )}
+    />
   </div>
 );
 

@@ -1,6 +1,7 @@
 $secondary: #6c757d;
 $base-color: #39434d;
 $dark-base-color: #262A2E;
+$dark-nav-color: #222833;
 $light: #d5d8db;
 $highlight: #17a2b8;
 $highlight-light: #03d3fc;
@@ -13,6 +14,10 @@ body {
 #root {
   .bg-base-color {
     background-color: $base-color;
+  }
+
+  .bg-dark-nav-color {
+    background-color: $dark-nav-color;
   }
 
   .text-light {
@@ -133,6 +138,27 @@ body {
         margin: 0;
       }
     }
+  }
+
+  .breadcrumbs div {
+    flex-direction: row;
+  }
+
+  .breadcrumbs a {
+    color: $highlight;
+  }
+
+  .breadcrumbs a:hover {
+    color: $highlight-light;
+  }
+
+  .breadcrumbs a:not(:first-child):before {
+    font-family: FontAwesome;
+    content: '\f178';
+    display: inline-block;
+    padding: 0 10px;
+    vertical-align: middle;
+    font-weight: 400;
   }
 
   background-color: $dark-base-color;

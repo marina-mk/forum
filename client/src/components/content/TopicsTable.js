@@ -31,7 +31,7 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({ fetchTopics, topics, match: { params: { section } } }) => {
+const TopicsTable = ({ fetchTopics, topics, section }) => {
   useEffect(() => { fetchTopics(section); }, []);
 
   return (
@@ -56,11 +56,7 @@ TopicsTable.propTypes = {
       name: PropTypes.string.isRequired,
     })),
   })).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      section: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+  section: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({ topics }) => ({ topics });
