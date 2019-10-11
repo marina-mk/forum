@@ -22,12 +22,10 @@ const Breadcrumbs = ({
   const currentTopic = topics.find((topic) => topic.index === +params.topic);
 
   return (
-    <nav className="breadcrumbs navbar navbar-dark bg-dark-nav-color">
-      <div className="navbar-nav">
-        {currentSection && <Link to={`/${currentSection.name}`} className="nav-item nav-link">{currentSection.title}</Link>}
-        {currentTopic && <Link to={`/${currentTopic.index}`} className="nav-item nav-link">{currentTopic.title}</Link>}
-      </div>
-    </nav>
+    <div className="breadcrumbs">
+      {currentSection && <Link to={`/${currentSection.name}`}>{currentSection.title}</Link>}
+      {currentTopic && <Link to={`/${currentTopic.index}`}>{currentTopic.title}</Link>}
+    </div>
   );
 };
 

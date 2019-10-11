@@ -4,10 +4,9 @@ import LoginDialog from '../modals/auth/login/Dialog';
 import RegisterDialog from '../modals/auth/register/Dialog';
 import loginFields from '../modals/auth/login/fields';
 import registerFields from '../modals/auth/register/fields';
-import SectionsTable from './SectionsTable';
-import TopicsTable from './TopicsTable';
+import Sections from './Sections';
+import Section from './Section';
 import Topic from './Topic';
-import Breadcrumbs from './Breadcrumbs';
 
 const Content = () => (
   <div id="content_container" className="container px-0">
@@ -26,29 +25,9 @@ const Content = () => (
       fields={registerFields}
     />
 
-    <Route exact path="/" component={SectionsTable} />
-
-    <Route
-      exact
-      path="/:section"
-      render={({ match }) => (
-        <>
-          <Breadcrumbs params={match.params} />
-          <TopicsTable section={match.params.section} />
-        </>
-      )}
-    />
-
-    <Route
-      exact
-      path="/:section/:topic"
-      render={({ match }) => (
-        <>
-          <Breadcrumbs params={match.params} />
-          <Topic />
-        </>
-      )}
-    />
+    <Route exact path="/" component={Sections} />
+    <Route exact path="/:section" component={Section} />
+    <Route exact path="/:section/:topic" component={Topic} />
   </div>
 );
 

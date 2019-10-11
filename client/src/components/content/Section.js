@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
+import Breadcrumbs from './Breadcrumbs';
 
 const renderTopics = (section, topics) => topics.map(({
   _id, index, title, description, created, author,
@@ -31,22 +32,29 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({ fetchTopics, topics, section }) => {
-  useEffect(() => { fetchTopics(section); }, []);
+const Section = ({ match, topics, fetchTopics }) => {
+  useEffect(() => { fetchTopics(match.params.section); }, []);
 
   return (
-    <div className="table-responsive">
-      <table className="topics table table-hover table-dark text-light font-size-small">
-        <tbody>
-          {renderTopics(section, topics)}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <nav className="navbar navbar-dark bg-dark-nav-color">
+        <Breadcrumbs params={match.params} />
+      </nav>
+      <div className="table-responsive">
+        <table className="topics table table-hover table-dark text-light font-size-small">
+          <tbody>
+            {renderTopics(match.params.section, topics)}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
-TopicsTable.propTypes = {
-  fetchTopics: PropTypes.func.isRequired,
+Section.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape().isRequired,
+  }).isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape({
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -56,9 +64,9 @@ TopicsTable.propTypes = {
       name: PropTypes.string.isRequired,
     })),
   })).isRequired,
-  section: PropTypes.string.isRequired,
+  fetchTopics: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ topics }) => ({ topics });
 
-export default connect(mapStateToProps, actions)(TopicsTable);
+export default connect(mapStateToProps, actions)(Section);

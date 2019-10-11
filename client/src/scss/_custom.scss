@@ -140,12 +140,17 @@ body {
     }
   }
 
-  .breadcrumbs div {
-    flex-direction: row;
+  .breadcrumbs {
+    display: flex;
   }
 
   .breadcrumbs a {
+    padding: .5rem 0;
     color: $highlight;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .breadcrumbs a:hover {
