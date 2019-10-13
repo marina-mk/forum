@@ -24,7 +24,7 @@ const Breadcrumbs = ({
   return (
     <div className="breadcrumbs">
       {currentSection && <Link to={`/${currentSection.name}`}>{currentSection.title}</Link>}
-      {currentTopic && <Link to={`/${currentTopic.index}`}>{currentTopic.title}</Link>}
+      {currentSection && currentTopic && <Link to={`/${currentSection.name}/${currentTopic.index}`}>{currentTopic.title}</Link>}
     </div>
   );
 };
