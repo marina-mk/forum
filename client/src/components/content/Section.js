@@ -39,6 +39,7 @@ const Section = ({ match, topics, fetchTopics }) => {
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
         <Breadcrumbs params={match.params} />
+        <button type="button" className="topic-button btn">Новая тема</button>
       </nav>
       <div className="table-responsive">
         <table className="topics table table-hover table-dark text-light font-size-small">
