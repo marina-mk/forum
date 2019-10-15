@@ -3,6 +3,7 @@ const Registration = require('../logic/auth/Registration');
 const Login = require('../logic/auth/Login');
 const Authentication = require('../logic/auth/Authentication');
 const Logout = require('../logic/auth/Logout');
+const requireAuth = require('../middlewares/requireAuth');
 
 module.exports = (app) => {
     app.post('/api/register', (request, response) => {
@@ -15,6 +16,10 @@ module.exports = (app) => {
 
     app.get('/api/auth', (request, response) => {
         new Authentication(request, response).execute();
+    });
+
+    app.get('/api/checkToken', requireAuth, (request, response) => {
+        response.sendStatus(200);
     });
 
     app.delete('/api/logout', (request, response) => {

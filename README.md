@@ -20,4 +20,5 @@ List of available API, e.g. https://lit-ocean-46169.herokuapp.com/api/test
 /api/register (method POST)
 /api/login (method POST)
 /api/logout (method DELETE)
+/api/checkToken
 ```
