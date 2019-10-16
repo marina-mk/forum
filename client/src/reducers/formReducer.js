@@ -29,4 +29,14 @@ export default formReducer.plugin({
         return state;
     }
   },
+  topicForm: (state, action) => {
+    switch (action.type) {
+      case types.SET_OPENED_TOPIC_FORM_DATA:
+        return { ...state, isOpened: true };
+      case types.SET_CLOSED_TOPIC_FORM_DATA:
+        return { ...state, isOpened: false };
+      default:
+        return state;
+    }
+  },
 });

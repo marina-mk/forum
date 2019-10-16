@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import AuthField from './AuthField';
-import BackdropFadePortal from './BackdropFadePortal';
+import BackdropFadePortal from '../BackdropFadePortal';
 
 const handleOnPortalClick = (event, onClick) => {
   if (event.target.className === 'modal fade show') {
