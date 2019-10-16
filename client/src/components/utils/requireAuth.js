@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -13,10 +12,7 @@ const requireAuth = (Component) => connect(mapStateToProps, null)((user, ...prop
     axios.get('/api/checkToken').then((response) => {
       const isResponseStatusOk = response.status === 200;
       setIsAuthorized(isResponseStatusOk);
-    }).catch((error) => {
-      setIsAuthorized(false);
-      console.log(error.message, error.response.data);
-    });
+    }).catch(() => { setIsAuthorized(false); });
   }, [user]);
 
   return (isAuthorized ? <Component {...props} /> : null);
