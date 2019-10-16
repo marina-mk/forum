@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import * as actions from '../../actions';
-import Breadcrumbs from './Breadcrumbs';
+import * as actions from '../../../actions';
 
 const renderTopics = (section, topics) => topics.map(({
   _id, index, title, description, created, author,
@@ -32,29 +31,23 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const Section = ({ match, topics, fetchTopics }) => {
-  useEffect(() => { fetchTopics(match.params.section); }, []);
+const TopicsTable = ({ params, topics, fetchTopics }) => {
+  useEffect(() => { fetchTopics(params.section); }, []);
 
   return (
-    <>
-      <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs params={match.params} />
-        <button type="button" className="topic-button btn">Новая тема</button>
-      </nav>
-      <div className="table-responsive">
-        <table className="topics table table-hover table-dark text-light font-size-small">
-          <tbody>
-            {renderTopics(match.params.section, topics)}
-          </tbody>
-        </table>
-      </div>
-    </>
+    <div className="table-responsive">
+      <table className="topics table table-hover table-dark text-light font-size-small">
+        <tbody>
+          {renderTopics(params.section, topics)}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-Section.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape().isRequired,
+TopicsTable.propTypes = {
+  params: PropTypes.shape({
+    section: PropTypes.string.isRequired,
   }).isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape({
     index: PropTypes.number.isRequired,
@@ -70,4 +63,4 @@ Section.propTypes = {
 
 const mapStateToProps = ({ topics }) => ({ topics });
 
-export default connect(mapStateToProps, actions)(Section);
+export default connect(mapStateToProps, actions)(TopicsTable);

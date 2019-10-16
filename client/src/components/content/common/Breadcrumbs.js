@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
 
 const Breadcrumbs = ({
   params, sections, topics, fetchSections, fetchTopics,

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from '../common/Breadcrumbs';
 
 const Topic = ({ match }) => (
   <>
