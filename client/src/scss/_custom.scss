@@ -32,6 +32,10 @@ body {
     font-size: $font-size-small;
   }
 
+  .modal-content textarea {
+    resize: none;
+  }
+
   .modal-header {
     border-bottom: 1px solid $dark-base-color;
   }

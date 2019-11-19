@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import AuthField from './AuthField';
+import { InputField } from '../DialogField';
 import BackdropFadePortal from '../BackdropFadePortal';
 
 const handleOnPortalClick = (event, onClick) => {
@@ -14,7 +14,7 @@ const handleOnPortalClick = (event, onClick) => {
 };
 
 const renderFields = (fields) => fields.map(({ name, type, placeholder }, i) => (
-  <Field key={i} component={AuthField} name={name} type={type} placeholder={placeholder} />
+  <Field key={i} component={InputField} name={name} type={type} placeholder={placeholder} />
 ));
 
 const AuthDialog = ({

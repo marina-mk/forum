@@ -1,8 +1,12 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { reduxForm, Field } from 'redux-form';
+import { InputField, TextareaField } from '../DialogField';
+import validate from './validate';
 import * as types from '../../../actions/types';
 import BackdropFadePortal from '../BackdropFadePortal';
 
@@ -12,7 +16,7 @@ const handleOnPortalClick = (event, onClick) => {
   }
 };
 
-const TopicDialog = ({ isOpened, closeForm }) => (
+const TopicDialog = ({ isOpened, error, closeForm }) => (
   <div
     className={`modal fade ${isOpened ? 'show' : ''}`}
     style={{ display: `${isOpened ? 'block' : 'none'}` }}
@@ -29,6 +33,11 @@ const TopicDialog = ({ isOpened, closeForm }) => (
         </div>
         <div className="modal-body">
           <form noValidate>
+            <Field component={InputField} name="title" type="text" placeholder="Название темы" />
+            <Field component={TextareaField} name="description" rows="5" placeholder="Краткое описание темы" />
+            <div className="mb-4">
+              <small className="form-text text-light">{error}</small>
+            </div>
             <div>
               <button type="submit" className="btn btn-secondary">Создать</button>
             </div>
@@ -42,10 +51,12 @@ const TopicDialog = ({ isOpened, closeForm }) => (
 
 TopicDialog.defaultProps = {
   isOpened: false,
+  error: null,
 };
 
 TopicDialog.propTypes = {
   isOpened: PropTypes.bool,
+  error: PropTypes.string,
   closeForm: PropTypes.func.isRequired,
 };
 
@@ -59,4 +70,4 @@ const mapStateToProps = ({ form }) => ({
 
 const mapDispatchToProps = { closeForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicDialog);
+export default reduxForm({ validate, form: 'topicForm' })(connect(mapStateToProps, mapDispatchToProps)(TopicDialog));

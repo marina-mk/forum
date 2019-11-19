@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import * as types from '../actions/types';
 import loginFormInitialState from '../components/modals/auth/login/initialState';
 import registerFormInitialState from '../components/modals/auth/register/initialState';
+import topicFormInitialState from '../components/modals/topic/initialState';
 
 export default formReducer.plugin({
   registerForm: (state, action) => {
@@ -34,7 +35,9 @@ export default formReducer.plugin({
       case types.SET_OPENED_TOPIC_FORM_DATA:
         return { ...state, isOpened: true };
       case types.SET_CLOSED_TOPIC_FORM_DATA:
-        return { ...state, isOpened: false };
+        return topicFormInitialState;
+      case types.SET_ERROR_TOPIC_FORM_DATA:
+        return { ...state, error: action.payload };
       default:
         return state;
     }
