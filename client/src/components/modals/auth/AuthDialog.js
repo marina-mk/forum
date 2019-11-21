@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { InputField } from '../DialogField';
 import BackdropFadePortal from '../BackdropFadePortal';
 
 const handleOnPortalClick = (event, onClick) => {
@@ -13,8 +13,8 @@ const handleOnPortalClick = (event, onClick) => {
   }
 };
 
-const renderFields = (fields) => fields.map(({ name, type, placeholder }, i) => (
-  <Field key={i} component={InputField} name={name} type={type} placeholder={placeholder} />
+const renderFields = (fields) => fields.map((props, i) => (
+  <Field key={i} {...props} />
 ));
 
 const AuthDialog = ({

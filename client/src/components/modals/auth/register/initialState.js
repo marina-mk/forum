@@ -4,11 +4,15 @@ export default {
     email: { name: 'email', type: 'Field', count: 1 },
     password: { name: 'password', type: 'Field', count: 1 },
     confirmPassword: { name: 'confirmPassword', type: 'Field', count: 1 },
+    rememberme: { name: 'rememberme', type: 'Field', count: 1 },
   },
   syncErrors: {
     email: 'Обязательное поле',
     name: 'Обязательное поле',
     password: 'Обязательное поле',
     confirmPassword: 'Обязательное поле',
+  },
+  values: {
+    rememberme: true,
   },
 };

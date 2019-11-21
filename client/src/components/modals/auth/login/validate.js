@@ -1,11 +1,13 @@
 export default (values, { fields }) => {
   const errors = {};
 
-  fields.forEach(({ name }) => {
-    if (!values[name]) {
-      errors[name] = 'Обязательное поле';
-    }
-  });
+  if (!values.name) {
+    errors.name = 'Обязательное поле';
+  }
+
+  if (!values.password) {
+    errors.password = 'Обязательное поле';
+  }
 
   return errors;
 };

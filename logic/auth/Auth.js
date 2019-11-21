@@ -14,8 +14,11 @@ class Auth {
     }
 
     sendWebtoken(user) {
-        const webtoken = jsonwebtoken.sign({ email: user.email }, keys.authSecretToken, { expiresIn: '1h' });
-        this.response.cookie(this.webTokenName, webtoken, { httpOnly: true });
+        const { rememberme } = this.data;
+        const maxAge = rememberme ? 2592e6 : 36e5;
+        const webtoken = jsonwebtoken.sign({ email: user.email }, keys.authSecretToken);
+
+        this.response.cookie(this.webTokenName, webtoken, { maxAge, httpOnly: true, sameSite: 'lax' });
         this.sendUserdata(user);
     }
 

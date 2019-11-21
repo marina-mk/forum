@@ -9,7 +9,7 @@ export default formReducer.plugin({
   registerForm: (state, action) => {
     switch (action.type) {
       case types.SET_OPENED_REGISTER_FORM_DATA:
-        return { ...state, isOpened: true };
+        return { ...registerFormInitialState, isOpened: true };
       case types.SET_CLOSED_REGISTER_FORM_DATA:
         return registerFormInitialState;
       case types.SET_ERROR_REGISTER_FORM_DATA:
@@ -21,7 +21,7 @@ export default formReducer.plugin({
   loginForm: (state, action) => {
     switch (action.type) {
       case types.SET_OPENED_LOGIN_FORM_DATA:
-        return { ...state, isOpened: true };
+        return { ...loginFormInitialState, isOpened: true };
       case types.SET_CLOSED_LOGIN_FORM_DATA:
         return loginFormInitialState;
       case types.SET_ERROR_LOGIN_FORM_DATA:

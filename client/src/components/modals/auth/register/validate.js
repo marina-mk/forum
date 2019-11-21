@@ -17,11 +17,21 @@ export default (values, { fields }) => {
     errors.confirmPassword = 'Пароль и подтверждение пароля не совпадают';
   }
 
-  fields.forEach(({ name }) => {
-    if (!values[name]) {
-      errors[name] = 'Обязательное поле';
-    }
-  });
+  if (!values.name) {
+    errors.name = 'Обязательное поле';
+  }
+
+  if (!values.email) {
+    errors.email = 'Обязательное поле';
+  }
+
+  if (!values.password) {
+    errors.password = 'Обязательное поле';
+  }
+
+  if (!values.confirmPassword) {
+    errors.confirmPassword = 'Обязательное поле';
+  }
 
   return errors;
 };
