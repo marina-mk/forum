@@ -17,6 +17,14 @@
     },
     "rules": {
         "indent": ["error", 4],
-        "quotes": [0, "double", { "allowTemplateLiterals": true }]
+        "quotes": [0, "double", { "allowTemplateLiterals": true }],
+        "max-len": ["warn", 150, 2, {
+            "ignoreUrls": true,
+            "ignoreComments": false,
+            "ignoreRegExpLiterals": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true
+        }],
+        "no-underscore-dangle": [2, { "allow": ["_id"] }]
     }
 }

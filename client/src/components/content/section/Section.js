@@ -15,7 +15,7 @@ const Section = ({ match }) => (
       <TopicButtonRequireAuth />
     </nav>
     <TopicsTable params={match.params} />
-    <TopicDialog />
+    <TopicDialog params={match.params} />
   </>
 );
 

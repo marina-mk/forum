@@ -5,6 +5,6 @@ export default {
   },
   syncErrors: {
     title: 'Обязательное поле',
-    description: 'Обязательное поле',
+    description: null,
   },
 };
