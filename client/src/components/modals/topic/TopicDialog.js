@@ -1,15 +1,12 @@
-/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { InputField, TextareaField } from '../DialogField';
+import * as mapDispatchToProps from '../../../actions/modals/topic';
 import validate from './validate';
-import * as types from '../../../actions/types';
-import { fetchTopics } from '../../../actions';
 import BackdropFadePortal from '../BackdropFadePortal';
 
 const handleOnPortalClick = (event, onClick) => {
@@ -70,26 +67,8 @@ TopicDialog.propTypes = {
   closeForm: PropTypes.func.isRequired,
 };
 
-const closeForm = () => (dispatch) => {
-  dispatch({ type: types.SET_CLOSED_TOPIC_FORM_DATA });
-};
-
-
-const submitData = (values, section) => async (dispatch) => {
-  axios.post(`/api/topics/${section}`, values).then((response) => {
-    if (response.status === 200) {
-      dispatch({ type: types.SET_CLOSED_TOPIC_FORM_DATA });
-      fetchTopics(section)(dispatch); // call subsequent action to fetch topics (method GET)
-    }
-  }).catch((error) => {
-    dispatch({ type: types.SET_ERROR_TOPIC_FORM_DATA, payload: error.response.data });
-  });
-};
-
 const mapStateToProps = ({ form }) => ({
   isOpened: form.topicForm ? form.topicForm.isOpened : false,
 });
-
-const mapDispatchToProps = { submitData, closeForm };
 
 export default reduxForm({ validate, form: 'topicForm' })(connect(mapStateToProps, mapDispatchToProps)(TopicDialog));
