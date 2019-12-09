@@ -1,14 +1,17 @@
 /* eslint-disable quote-props */
 require('../models/Section');
 require('../models/Topic');
+require('../models/Post');
 const mongoose = require('mongoose');
 const sectionsPipeline = require('../logic/data/aggregation/sections');
 const topicsPipeline = require('../logic/data/aggregation/topics');
+const postsPipeline = require('../logic/data/aggregation/posts');
 const requireAuth = require('../middlewares/requireAuth');
 
 const User = mongoose.model('users');
 const Section = mongoose.model('sections');
 const Topic = mongoose.model('topics');
+const Post = mongoose.model('posts');
 
 module.exports = (app) => {
     app.get('/api/sections', async (request, response) => {
@@ -54,6 +57,18 @@ module.exports = (app) => {
             response.sendStatus(200);
         } catch (err) {
             response.status(422).send('Ошибка во время создания новой темы. Пожалуйста, повторите попытку позже.');
+        }
+    });
+
+    app.get('/api/posts/:section/:topic', async (request, response) => {
+        const { section, topic } = request.params;
+
+        try {
+            const topicIndex = +topic;
+            const posts = await Post.aggregate(postsPipeline(section, topicIndex));
+            response.send(posts);
+        } catch (err) {
+            response.status(500).send('Internal server error occurred during fetching posts');
         }
     });
 };
