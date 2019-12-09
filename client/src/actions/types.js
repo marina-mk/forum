@@ -11,3 +11,4 @@ export const FETCH_TOPICS_DATA = 'fetch_topics';
 export const SET_OPENED_TOPIC_FORM_DATA = 'set_opened_topic_form';
 export const SET_CLOSED_TOPIC_FORM_DATA = 'set_closed_topic_form';
 export const SET_ERROR_TOPIC_FORM_DATA = 'set_error_topic_form';
+export const FETCH_POSTS_DATA = 'fetch_posts';

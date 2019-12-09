@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import Breadcrumbs from '../common/Breadcrumbs';
+import PostsTable from './PostsTable';
 
 const Topic = ({ match: { params: { section, topic } }, fetchSections, fetchTopics }) => {
   useEffect(() => { fetchSections(); }, []);
@@ -14,6 +15,7 @@ const Topic = ({ match: { params: { section, topic } }, fetchSections, fetchTopi
       <nav className="navbar navbar-dark bg-dark-nav-color">
         <Breadcrumbs sectionName={section} topicIndex={+topic} />
       </nav>
+      <PostsTable section={section} topic={topic} />
     </>
   );
 };

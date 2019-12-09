@@ -29,3 +29,10 @@ export const fetchTopics = (section) => async (dispatch) => {
     dispatch({ type: types.FETCH_TOPICS_DATA, payload: response.data });
   } catch (err) {}
 };
+
+export const fetchPosts = (section, topic) => async (dispatch) => {
+  try {
+    const response = await axios.get(`/api/posts/${section}/${topic}`);
+    dispatch({ type: types.FETCH_POSTS_DATA, payload: response.data });
+  } catch (err) {}
+};

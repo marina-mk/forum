@@ -189,6 +189,51 @@ body {
     font-weight: 400;
   }
 
+  table.posts {
+    td {
+      align-items: flex-start;
+      margin: 0;
+
+      .avatar {
+        align-items: center;
+        background-color: $dark-base-color;
+        padding: 15px;
+
+        .card-body {
+          padding: 0.5rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .avatar {
+          flex-direction: row;
+          align-items: flex-start;
+
+          .card-body {
+            padding: 0 1rem;
+          }
+        }
+      }
+    }
+
+    .postInfo {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 0.5rem 0;
+    }
+
+    tr:hover {
+      .postInfo {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .avatar {
+        background-color: #343a40;
+      }
+    }
+  }
+
   background-color: $dark-base-color;
 }
 
