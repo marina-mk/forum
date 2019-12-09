@@ -16,7 +16,7 @@ const handleOnPortalClick = (event, onClick) => {
 };
 
 const TopicDialog = ({
-  params, isOpened, error, handleSubmit,
+  section, isOpened, error, handleSubmit,
   submitData, closeForm,
 }) => (
   <div
@@ -34,7 +34,7 @@ const TopicDialog = ({
           </button>
         </div>
         <div className="modal-body">
-          <form onSubmit={handleSubmit((values) => { submitData(values, params.section); })} noValidate>
+          <form onSubmit={handleSubmit((values) => { submitData(values, section); })} noValidate>
             <Field component={InputField} name="title" type="text" placeholder="Название темы" />
             <Field component={TextareaField} name="description" rows="5" placeholder="Краткое описание темы" />
             <div className="mb-4">
@@ -57,9 +57,7 @@ TopicDialog.defaultProps = {
 };
 
 TopicDialog.propTypes = {
-  params: PropTypes.shape({
-    section: PropTypes.string.isRequired,
-  }).isRequired,
+  section: PropTypes.string.isRequired,
   isOpened: PropTypes.bool,
   error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,

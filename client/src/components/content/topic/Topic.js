@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import Breadcrumbs from '../common/Breadcrumbs';
 
-const Topic = ({ match, fetchSections, fetchTopics }) => {
+const Topic = ({ match: { params: { section, topic } }, fetchSections, fetchTopics }) => {
   useEffect(() => { fetchSections(); }, []);
-  useEffect(() => { fetchTopics(match.params.section); }, []);
+  useEffect(() => { fetchTopics(section); }, []);
 
   return (
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs params={match.params} />
+        <Breadcrumbs sectionName={section} topicIndex={+topic} />
       </nav>
     </>
   );
@@ -20,7 +20,10 @@ const Topic = ({ match, fetchSections, fetchTopics }) => {
 
 Topic.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape().isRequired,
+    params: PropTypes.shape({
+      section: PropTypes.string.isRequired,
+      topic: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   fetchSections: PropTypes.func.isRequired,
   fetchTopics: PropTypes.func.isRequired,

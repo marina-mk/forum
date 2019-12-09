@@ -11,18 +11,18 @@ import requireAuth from '../../utils/requireAuth';
 
 const TopicButtonRequireAuth = requireAuth(TopicButton);
 
-const Section = ({ match, fetchSections, fetchTopics }) => {
+const Section = ({ match: { params: { section } }, fetchSections, fetchTopics }) => {
   useEffect(() => { fetchSections(); }, []);
-  useEffect(() => { fetchTopics(match.params.section); }, []);
+  useEffect(() => { fetchTopics(section); }, []);
 
   return (
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs params={match.params} />
+        <Breadcrumbs sectionName={section} />
         <TopicButtonRequireAuth />
       </nav>
-      <TopicsTable params={match.params} />
-      <TopicDialog params={match.params} />
+      <TopicsTable section={section} />
+      <TopicDialog section={section} />
     </>
   );
 };

@@ -30,20 +30,18 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({ params, topics }) => (
+const TopicsTable = ({ section, topics }) => (
   <div className="table-responsive">
     <table className="topics table table-hover table-dark text-light font-size-small">
       <tbody>
-        {renderTopics(params.section, topics)}
+        {renderTopics(section, topics)}
       </tbody>
     </table>
   </div>
 );
 
 TopicsTable.propTypes = {
-  params: PropTypes.shape({
-    section: PropTypes.string.isRequired,
-  }).isRequired,
+  section: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape({
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

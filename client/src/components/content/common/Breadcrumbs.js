@@ -1,12 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Breadcrumbs = ({ params, sections, topics }) => {
-  const currentSection = sections.find((section) => section.name === params.section);
-  const currentTopic = topics.find((topic) => topic.index === +params.topic);
+const Breadcrumbs = ({
+  sectionName, topicIndex, sections, topics,
+}) => {
+  const currentSection = sections.find((section) => section.name === sectionName);
+  const currentTopic = topics.find((topic) => topic.index === topicIndex);
 
   return (
     <div className="breadcrumbs">
@@ -16,11 +17,14 @@ const Breadcrumbs = ({ params, sections, topics }) => {
   );
 };
 
+Breadcrumbs.defaultProps = {
+  sectionName: null,
+  topicIndex: -1,
+};
+
 Breadcrumbs.propTypes = {
-  params: PropTypes.shape({
-    section: PropTypes.string.isRequired,
-    topic: PropTypes.string,
-  }).isRequired,
+  sectionName: PropTypes.string,
+  topicIndex: PropTypes.number,
   sections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
