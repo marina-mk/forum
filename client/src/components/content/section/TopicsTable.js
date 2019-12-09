@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actions from '../../../actions';
 
 const renderTopics = (section, topics) => topics.map(({
   _id, index, title, description, created, author,
@@ -31,19 +30,15 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({ params, topics, fetchTopics }) => {
-  useEffect(() => { fetchTopics(params.section); }, []);
-
-  return (
-    <div className="table-responsive">
-      <table className="topics table table-hover table-dark text-light font-size-small">
-        <tbody>
-          {renderTopics(params.section, topics)}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+const TopicsTable = ({ params, topics }) => (
+  <div className="table-responsive">
+    <table className="topics table table-hover table-dark text-light font-size-small">
+      <tbody>
+        {renderTopics(params.section, topics)}
+      </tbody>
+    </table>
+  </div>
+);
 
 TopicsTable.propTypes = {
   params: PropTypes.shape({
@@ -58,9 +53,8 @@ TopicsTable.propTypes = {
       name: PropTypes.string.isRequired,
     })),
   })).isRequired,
-  fetchTopics: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ topics }) => ({ topics });
 
-export default connect(mapStateToProps, actions)(TopicsTable);
+export default connect(mapStateToProps)(TopicsTable);
