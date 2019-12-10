@@ -2,7 +2,7 @@ const Auth = require('./Auth');
 
 class Logout extends Auth {
     execute() {
-        this.response.clearCookie(this.webTokenName).sendStatus(200);
+        this.response.clearCookie(this.webTokenName).sendStatus(204);
     }
 }
 

@@ -14,7 +14,7 @@ const renderTopics = (section, topics) => topics.map(({
     <tr key={_id}>
       <td>
         <div className="info">
-          <Link to={`/${section}/${index}`} className="title">{title}</Link>
+          <Link to={`/${section}/topic-${index + 1}`} className="title">{title}</Link>
           <div className="description">{description}</div>
           <div className="topicInfo">{topicInfo}</div>
         </div>

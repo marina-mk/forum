@@ -1,5 +1,5 @@
 /* eslint-disable quote-props */
-module.exports = (section) => [
+module.exports = (sectionId) => [
     {
         $lookup: {
             from: "sections",
@@ -17,7 +17,7 @@ module.exports = (section) => [
         },
     },
     {
-        $match: { "section.name": section },
+        $match: { "section.name": sectionId },
     },
     {
         $sort: { "index": 1 },

@@ -40,7 +40,7 @@ class Registration extends Auth {
             if (error) {
                 this.response.status(500).send('Ошибка во время регистрации. Пожалуйста, повторите попытку позже.');
             } else {
-                this.sendWebtoken(user);
+                this.sendWebtoken(user, 201);
                 if (next) next();
             }
         });

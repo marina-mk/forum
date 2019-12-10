@@ -9,17 +9,17 @@ class Auth {
         this.webTokenName = 'authToken';
     }
 
-    sendUserdata(user) {
-        this.response.send({ name: user.name });
+    sendUserdata(user, status = 200) {
+        this.response.status(status).send({ name: user.name });
     }
 
-    sendWebtoken(user) {
+    sendWebtoken(user, status) {
         const { rememberme } = this.data;
         const maxAge = rememberme ? 2592e6 : 36e5;
         const webtoken = jsonwebtoken.sign({ email: user.email }, keys.authSecretToken);
 
         this.response.cookie(this.webTokenName, webtoken, { maxAge, httpOnly: true, sameSite: 'lax' });
-        this.sendUserdata(user);
+        this.sendUserdata(user, status);
     }
 
     checkWebtoken(callback) {

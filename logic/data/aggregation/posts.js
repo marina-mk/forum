@@ -1,5 +1,5 @@
 /* eslint-disable quote-props */
-module.exports = (section, topicIndex) => [
+module.exports = (sectionId, topicIndex) => [
     {
         $lookup: {
             from: "topics",
@@ -25,7 +25,7 @@ module.exports = (section, topicIndex) => [
         },
     },
     {
-        $match: { "section.name": section },
+        $match: { "section.name": sectionId },
     },
     {
         $match: { "topic.index": topicIndex },

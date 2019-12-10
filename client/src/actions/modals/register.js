@@ -3,7 +3,7 @@ import * as types from '../types';
 
 export const submitAuthData = (values, path) => async (dispatch) => {
   axios.post(path, values).then((response) => {
-    if (response.status === 200) {
+    if (response.status === 201) {
       dispatch({ type: types.FETCH_USER_DATA, payload: response.data });
       dispatch({ type: types.SET_CLOSED_REGISTER_FORM_DATA });
     }

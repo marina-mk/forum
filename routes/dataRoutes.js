@@ -23,24 +23,24 @@ module.exports = (app) => {
         }
     });
 
-    app.get('/api/topics/:section', async (request, response) => {
-        const { section } = request.params;
+    app.get('/api/sections/:sectionId/topics', async (request, response) => {
+        const { sectionId } = request.params;
 
         try {
-            const topics = await Topic.aggregate(topicsPipeline(section));
+            const topics = await Topic.aggregate(topicsPipeline(sectionId));
             response.send(topics);
         } catch (err) {
             response.status(500).send('Internal server error occurred during fetching topics');
         }
     });
 
-    app.post('/api/topics/:section', requireAuth, async (request, response) => {
-        const { section: sectionName } = request.params;
+    app.post('/api/sections/:sectionId/topics', requireAuth, async (request, response) => {
+        const { sectionId } = request.params;
         const { title, description } = request.body;
 
         try {
             const user = await User.findOne({ email: request.email });
-            const section = await Section.findOne({ name: sectionName });
+            const section = await Section.findOne({ name: sectionId });
             const latestTopic = await Topic.findOne({ _section: section._id }).sort({ index: -1 });
             const index = latestTopic ? latestTopic.index + 1 : 0;
 
@@ -54,18 +54,18 @@ module.exports = (app) => {
             });
 
             await topic.save();
-            response.sendStatus(200);
+            response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания новой темы. Пожалуйста, повторите попытку позже.');
         }
     });
 
-    app.get('/api/posts/:section/:topic', async (request, response) => {
-        const { section, topic } = request.params;
+    app.get('/api/sections/:sectionId/topics/:topicId/posts', async (request, response) => {
+        const { sectionId, topicId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
 
         try {
-            const topicIndex = +topic;
-            const posts = await Post.aggregate(postsPipeline(section, topicIndex));
+            const posts = await Post.aggregate(postsPipeline(sectionId, topicIndex));
             response.send(posts);
         } catch (err) {
             response.status(500).send('Internal server error occurred during fetching posts');

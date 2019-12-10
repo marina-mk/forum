@@ -23,16 +23,16 @@ export const fetchSections = () => async (dispatch) => {
   } catch (err) {}
 };
 
-export const fetchTopics = (section) => async (dispatch) => {
+export const fetchTopics = (sectionId) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/topics/${section}`);
+    const response = await axios.get(`/api/sections/${sectionId}/topics`);
     dispatch({ type: types.FETCH_TOPICS_DATA, payload: response.data });
   } catch (err) {}
 };
 
-export const fetchPosts = (section, topic) => async (dispatch) => {
+export const fetchPosts = (sectionId, topicId) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/posts/${section}/${topic}`);
+    const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}/posts`);
     dispatch({ type: types.FETCH_POSTS_DATA, payload: response.data });
   } catch (err) {}
 };

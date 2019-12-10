@@ -7,13 +7,15 @@ import Breadcrumbs from '../common/Breadcrumbs';
 import PostsTable from './PostsTable';
 
 const Topic = ({ match: { params: { section, topic } }, fetchSections, fetchTopics }) => {
+  const topicIndex = +topic.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
+
   useEffect(() => { fetchSections(); }, []);
   useEffect(() => { fetchTopics(section); }, []);
 
   return (
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs sectionName={section} topicIndex={+topic} />
+        <Breadcrumbs sectionName={section} topicIndex={topicIndex} />
       </nav>
       <PostsTable section={section} topic={topic} />
     </>
