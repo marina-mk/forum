@@ -19,10 +19,24 @@ const createTopicsCountStr = (topicsCount) => {
   }
 };
 
+const createPostsCountStr = (postsCount) => {
+  switch (postsCount % 10) {
+    case 1:
+      return `${postsCount} сообщение`;
+    case 2:
+    case 3:
+    case 4:
+      return `${postsCount} сообщения`;
+    default:
+      return `${postsCount} сообщений`;
+  }
+};
+
 const renderSections = (sections) => sections.map(({
-  _id, title, description, name, topicsCount,
+  _id, title, description, name, topicsCount, postsCount,
 }) => {
   const topicsCountStr = createTopicsCountStr(topicsCount);
+  const postsCountStr = createPostsCountStr(postsCount);
 
   return (
     <tr key={_id}>
@@ -36,7 +50,9 @@ const renderSections = (sections) => sections.map(({
             <span>{topicsCountStr}</span>
             <span>&nbsp;</span>
           </div>
-          <div>0 сообщений</div>
+          <div>
+            <span>{postsCountStr}</span>
+          </div>
         </div>
       </td>
     </tr>
