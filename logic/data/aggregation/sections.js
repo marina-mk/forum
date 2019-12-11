@@ -5,19 +5,24 @@ module.exports = [
             from: "topics",
             localField: "_id",
             foreignField: "_section",
-            as: "topic",
+            as: "topics",
+        },
+    },
+    {
+        $addFields: {
+            topicsCount: { $size: "$topics" },
         },
     },
     {
         $unwind: {
-            path: "$topic",
+            path: "$topics",
             preserveNullAndEmptyArrays: true,
         },
     },
     {
         $lookup: {
             from: "posts",
-            localField: "topic._id",
+            localField: "topics._id",
             foreignField: "_topic",
             as: "topic.posts",
         },
@@ -29,7 +34,7 @@ module.exports = [
             title: { $first: "$title" },
             description: { $first: "$description" },
             name: { $first: "$name" },
-            topicsCount: { $sum: 1 },
+            topicsCount: { $first: "$topicsCount" },
             postsCount: { $sum: { $size: "$topic.posts" } },
         },
     },
