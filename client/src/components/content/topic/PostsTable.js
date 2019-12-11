@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import avatarImage from '../../../images/img_avatar.png';
+import { formatPostPublishedInfo, formatPostNumInfo } from '../../utils/helpers/formatters';
 
 const renderPosts = (posts) => posts.map(({
   _id, index, body, created, author,
 }) => {
-  const createdFormated = new Date(created).toLocaleString('ru', { dateStyle: "short", timeStyle: "short" });
-  const publishedInfo = `Опубликовано ${createdFormated}`;
-  const numInfo = `№${index + 1}`;
+  const publishedInfoStr = formatPostPublishedInfo(created);
+  const numInfoStr = formatPostNumInfo(index);
 
   return (
     <tr key={_id}>
@@ -23,8 +23,8 @@ const renderPosts = (posts) => posts.map(({
         </div>
         <div className="col-sm-10">
           <div className="postInfo">
-            <div>{publishedInfo}</div>
-            <div>{numInfo}</div>
+            <div>{publishedInfoStr}</div>
+            <div>{numInfoStr}</div>
           </div>
           <div className="postBody">{body}</div>
         </div>

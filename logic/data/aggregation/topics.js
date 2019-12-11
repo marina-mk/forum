@@ -10,11 +10,22 @@ module.exports = (sectionId) => [
     },
     {
         $lookup: {
+            from: "posts",
+            localField: "_id",
+            foreignField: "_topic",
+            as: "posts",
+        },
+    },
+    {
+        $lookup: {
             from: "users",
             localField: "_author",
             foreignField: "_id",
             as: "author",
         },
+    },
+    {
+        $unwind: { path: "$author" },
     },
     {
         $match: { "section.name": sectionId },
@@ -30,6 +41,7 @@ module.exports = (sectionId) => [
             "author.name": 1,
             "created": 1,
             "index": 1,
+            "postsCount": { $size: "$posts" },
         },
     },
 ];

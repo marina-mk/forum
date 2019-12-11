@@ -3,12 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { formatResponsesCount, formatTopicInfo } from '../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
-  _id, index, title, description, created, author,
+  _id, index, title, description, created, author, postsCount,
 }) => {
-  const createdFormated = new Date(created).toLocaleString('ru', { dateStyle: "short", timeStyle: "short" });
-  const topicInfo = `Автор: ${author[0].name}, ${createdFormated}`;
+  const topicInfoStr = formatTopicInfo(created, author);
+  const responsesCountStr = formatResponsesCount(postsCount);
 
   return (
     <tr key={_id}>
@@ -16,11 +17,11 @@ const renderTopics = (section, topics) => topics.map(({
         <div className="info">
           <Link to={`/${section}/topic-${index + 1}`} className="title">{title}</Link>
           <div className="description">{description}</div>
-          <div className="topicInfo">{topicInfo}</div>
+          <div className="topicInfo">{topicInfoStr}</div>
         </div>
         <div className="counts">
           <div>
-            <span>0 ответов</span>
+            <span>{responsesCountStr}</span>
             <span>&nbsp;</span>
           </div>
           <div>0 просмотров</div>

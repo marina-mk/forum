@@ -1,42 +1,16 @@
-/* eslint-disable indent */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
-
-const createTopicsCountStr = (topicsCount) => {
-  switch (topicsCount % 10) {
-    case 1:
-      return `${topicsCount} тема`;
-    case 2:
-    case 3:
-    case 4:
-      return `${topicsCount} темы`;
-    default:
-      return `${topicsCount} тем`;
-  }
-};
-
-const createPostsCountStr = (postsCount) => {
-  switch (postsCount % 10) {
-    case 1:
-      return `${postsCount} сообщение`;
-    case 2:
-    case 3:
-    case 4:
-      return `${postsCount} сообщения`;
-    default:
-      return `${postsCount} сообщений`;
-  }
-};
+import { formatTopicsCount, formatPostsCount } from '../../utils/helpers/formatters';
 
 const renderSections = (sections) => sections.map(({
   _id, title, description, name, topicsCount, postsCount,
 }) => {
-  const topicsCountStr = createTopicsCountStr(topicsCount);
-  const postsCountStr = createPostsCountStr(postsCount);
+  const topicsCountStr = formatTopicsCount(topicsCount);
+  const postsCountStr = formatPostsCount(postsCount);
 
   return (
     <tr key={_id}>
