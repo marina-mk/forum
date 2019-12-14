@@ -13,8 +13,12 @@
     "client": "npm run start --prefix client",
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "client-unit-tests": "npm run unit-tests --prefix client"
   },
+  "pre-commit": [
+    "client-unit-tests"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -30,6 +34,6 @@
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "pre-commit": "^1.2.2"
   }
 }

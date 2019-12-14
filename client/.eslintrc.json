@@ -24,5 +24,10 @@
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true
     }]
+  },
+  "settings": {
+    "import/resolver": {
+        "babel-module": {}
+    }
   }
 }
