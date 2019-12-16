@@ -33,7 +33,7 @@ const renderSections = (sections) => sections.map(({
   );
 });
 
-const Sections = ({ fetchSections, sections }) => {
+const SectionsTable = ({ fetchSections, sections }) => {
   useEffect(() => { fetchSections(); }, []);
 
   return (
@@ -47,7 +47,7 @@ const Sections = ({ fetchSections, sections }) => {
   );
 };
 
-Sections.propTypes = {
+SectionsTable.propTypes = {
   fetchSections: PropTypes.func.isRequired,
   sections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -59,4 +59,4 @@ Sections.propTypes = {
 
 const mapStateToProps = ({ sections }) => ({ sections });
 
-export default connect(mapStateToProps, actions)(Sections);
+export default connect(mapStateToProps, actions)(SectionsTable);

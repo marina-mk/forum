@@ -11,14 +11,16 @@ import requireAuth from '../../utils/requireAuth';
 
 const TopicButtonRequireAuth = requireAuth(TopicButton);
 
-const Section = ({ match: { params: { section } }, fetchSections, fetchTopics }) => {
-  useEffect(() => { fetchSections(); }, []);
-  useEffect(() => { fetchTopics(section); }, []);
+const Section = ({ match: { params: { section } }, fetchCurrentSection, dropCurrentTopic }) => {
+  useEffect(() => {
+    dropCurrentTopic();
+    fetchCurrentSection(section);
+  }, []);
 
   return (
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs sectionName={section} />
+        <Breadcrumbs />
         <TopicButtonRequireAuth />
       </nav>
       <TopicsTable section={section} />
@@ -33,8 +35,8 @@ Section.propTypes = {
       section: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  fetchSections: PropTypes.func.isRequired,
-  fetchTopics: PropTypes.func.isRequired,
+  fetchCurrentSection: PropTypes.func.isRequired,
+  dropCurrentTopic: PropTypes.func.isRequired,
 };
 
 export default connect(null, actions)(Section);

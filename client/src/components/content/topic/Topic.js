@@ -6,16 +6,18 @@ import * as actions from '../../../actions';
 import Breadcrumbs from '../common/Breadcrumbs';
 import PostsTable from './PostsTable';
 
-const Topic = ({ match: { params: { section, topic } }, fetchSections, fetchTopics }) => {
-  const topicIndex = +topic.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
-
-  useEffect(() => { fetchSections(); }, []);
-  useEffect(() => { fetchTopics(section); }, []);
+const Topic = ({
+  match: { params: { section, topic } },
+  fetchCurrentSection,
+  fetchCurrentTopic,
+}) => {
+  useEffect(() => { fetchCurrentSection(section); }, []);
+  useEffect(() => { fetchCurrentTopic(section, topic); }, []);
 
   return (
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs sectionName={section} topicIndex={topicIndex} />
+        <Breadcrumbs />
       </nav>
       <PostsTable section={section} topic={topic} />
     </>
@@ -29,8 +31,8 @@ Topic.propTypes = {
       topic: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  fetchSections: PropTypes.func.isRequired,
-  fetchTopics: PropTypes.func.isRequired,
+  fetchCurrentSection: PropTypes.func.isRequired,
+  fetchCurrentTopic: PropTypes.func.isRequired,
 };
 
 export default connect(null, actions)(Topic);

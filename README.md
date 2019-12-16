@@ -23,7 +23,9 @@ List of available API, e.g. https://lit-ocean-46169.herokuapp.com/api/test
 /api/checkToken
 
 /api/sections - get all sections of this forum
+/api/sections/:sectionId - get current section
 /api/sections/:sectionId/topics - get all topics of the current section
 /api/sections/:sectionId/topics (method POST) - post new topic in the current section
+/api/sections/:sectionId/topics/:topicId - get current topic
 /api/sections/:sectionId/topics/:topicId/posts - get all posts of the current topic
 ```

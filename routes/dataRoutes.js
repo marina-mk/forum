@@ -23,6 +23,22 @@ module.exports = (app) => {
         }
     });
 
+    app.get('/api/sections/:sectionId', async (request, response) => {
+        const { sectionId } = request.params;
+
+        try {
+            const section = await Section.findOne({ name: sectionId }, { "title": 1, "name": 1 });
+
+            if (!section) {
+                response.status(404).send('Not found section with given id');
+            } else {
+                response.send(section);
+            }
+        } catch (err) {
+            response.status(500).send('Internal server error occurred during searching section by id');
+        }
+    });
+
     app.get('/api/sections/:sectionId/topics', async (request, response) => {
         const { sectionId } = request.params;
 
@@ -57,6 +73,24 @@ module.exports = (app) => {
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания новой темы. Пожалуйста, повторите попытку позже.');
+        }
+    });
+
+    app.get('/api/sections/:sectionId/topics/:topicId', async (request, response) => {
+        const { sectionId, topicId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
+
+        try {
+            const section = await Section.findOne({ name: sectionId });
+            const topic = await Topic.findOne({ _section: section._id, index: topicIndex }, { "title": 1, "index": 1 });
+
+            if (!topic) {
+                response.status(404).send('Not found topic with given id');
+            } else {
+                response.send(topic);
+            }
+        } catch (err) {
+            response.status(500).send('Internal server error occurred during searching topic by id');
         }
     });
 
