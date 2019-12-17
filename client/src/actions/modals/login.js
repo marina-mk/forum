@@ -1,6 +1,10 @@
 import axios from 'axios';
 import * as types from '../types';
 
+export const setIsOpenedLoginForm = () => (dispatch) => {
+  dispatch({ type: types.SET_OPENED_LOGIN_FORM_DATA });
+};
+
 export const submitAuthData = (values, path) => async (dispatch) => {
   axios.post(path, values).then((response) => {
     if (response.status === 200) {

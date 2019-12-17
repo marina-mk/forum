@@ -2,7 +2,7 @@
 const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const MIN_PASSWORD_LENGTH = 6;
 
-export default (values, { fields }) => {
+export default (values) => {
   const errors = {};
 
   if (!EMAIL_REGEXP.test(values.email)) {

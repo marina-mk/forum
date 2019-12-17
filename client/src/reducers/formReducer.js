@@ -4,6 +4,7 @@ import * as types from '../actions/types';
 import loginFormInitialState from '../components/modals/auth/login/initialState';
 import registerFormInitialState from '../components/modals/auth/register/initialState';
 import topicFormInitialState from '../components/modals/topic/initialState';
+import postFormInitialState from '../components/modals/post/initialState';
 
 export default formReducer.plugin({
   registerForm: (state, action) => {
@@ -38,6 +39,16 @@ export default formReducer.plugin({
         return topicFormInitialState;
       case types.SET_ERROR_TOPIC_FORM_DATA:
         return { ...state, error: action.payload };
+      default:
+        return state;
+    }
+  },
+  postForm: (state, action) => {
+    switch (action.type) {
+      case types.SET_OPENED_POST_FORM_DATA:
+        return { ...state, isOpened: true };
+      case types.SET_CLOSED_POST_FORM_DATA:
+        return postFormInitialState;
       default:
         return state;
     }

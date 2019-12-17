@@ -1,4 +1,4 @@
-export default (values, { fields }) => {
+export default (values) => {
   const errors = {};
 
   if (!values.name) {

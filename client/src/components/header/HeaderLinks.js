@@ -5,10 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions';
-import * as types from '../../actions/types';
+import { setIsOpenedLoginForm } from '../../actions/modals/login';
+import { setIsOpenedRegisterForm } from '../../actions/modals/register';
 
 const HeaderLinks = ({
-  user, logout, setIsOpenedLoginForm, setIsOpenedRegisterForm,
+  user, logout, setIsOpenedLogin, setIsOpenedRegister,
 }) => {
   if (user) {
     return (
@@ -20,28 +21,25 @@ const HeaderLinks = ({
 
   return [
     <li className="nav-item" key="login">
-      <a className="nav-link" onClick={setIsOpenedLoginForm}>Вход</a>
+      <a className="nav-link" onClick={setIsOpenedLogin}>Вход</a>
     </li>,
     <li className="nav-item" key="register">
-      <a className="nav-link" onClick={setIsOpenedRegisterForm}>Регистрация</a>
+      <a className="nav-link" onClick={setIsOpenedRegister}>Регистрация</a>
     </li>,
   ];
 };
 
 HeaderLinks.propTypes = {
-  setIsOpenedLoginForm: PropTypes.func.isRequired,
-  setIsOpenedRegisterForm: PropTypes.func.isRequired,
-};
-
-const setIsOpenedLoginForm = () => (dispatch) => {
-  dispatch({ type: types.SET_OPENED_LOGIN_FORM_DATA });
-};
-
-const setIsOpenedRegisterForm = () => (dispatch) => {
-  dispatch({ type: types.SET_OPENED_REGISTER_FORM_DATA });
+  logout: PropTypes.func.isRequired,
+  setIsOpenedLogin: PropTypes.func.isRequired,
+  setIsOpenedRegister: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ user }) => ({ user });
-const mapDispatchToProps = { logout: logoutUser, setIsOpenedLoginForm, setIsOpenedRegisterForm };
+const mapDispatchToProps = {
+  logout: logoutUser,
+  setIsOpenedLogin: setIsOpenedLoginForm,
+  setIsOpenedRegister: setIsOpenedRegisterForm,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderLinks);

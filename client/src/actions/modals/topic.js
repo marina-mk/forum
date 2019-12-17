@@ -2,6 +2,10 @@ import axios from 'axios';
 import * as types from '../types';
 import { fetchTopics } from '..';
 
+export const setIsOpenedTopicForm = () => (dispatch) => {
+  dispatch({ type: types.SET_OPENED_TOPIC_FORM_DATA });
+};
+
 export const submitData = (values, sectionId) => async (dispatch) => {
   axios.post(`/api/sections/${sectionId}/topics`, values).then((response) => {
     if (response.status === 201) {

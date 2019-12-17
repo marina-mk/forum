@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import Breadcrumbs from '../common/Breadcrumbs';
 import PostsTable from './PostsTable';
+import PostButton from './PostButton';
+import requireAuth from '../../utils/requireAuth';
+import PostDialog from '../../modals/post/PostDialog';
+
+const PostButtonRequireAuth = requireAuth(PostButton);
 
 const Topic = ({
   match: { params: { section, topic } },
@@ -18,8 +23,10 @@ const Topic = ({
     <>
       <nav className="navbar navbar-dark bg-dark-nav-color">
         <Breadcrumbs />
+        <PostButtonRequireAuth />
       </nav>
       <PostsTable section={section} topic={topic} />
+      <PostDialog section={section} topic={topic} />
     </>
   );
 };
