@@ -21,7 +21,7 @@ module.exports = {
         loader: "babel-loader",
       },
       {
-        test: /\.(scss)$/,
+        test: /\.(css|scss)$/,
         use: [
           // fallback to style-loader in development
           process.env.NODE_ENV !== "production" ? "style-loader" : MiniCssExtractPlugin.loader,

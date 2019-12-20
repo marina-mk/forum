@@ -40,7 +40,7 @@ body {
     border-bottom: 1px solid $dark-base-color;
   }
 
-  .modal-body div:last-child {
+  .modal-body form > div:last-child {
     display: flex;
     align-items: center;
     justify-content: flex-end;

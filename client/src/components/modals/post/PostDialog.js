@@ -3,11 +3,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { reduxForm, Field } from 'redux-form';
-import { TextareaField } from '../DialogField';
 import * as mapDispatchToProps from '../../../actions/modals/post';
-import validate from './validate';
 import BackdropFadePortal from '../BackdropFadePortal';
+import RichTextEditor from './RichTextEditor';
 
 const handleOnPortalClick = (event, onClick) => {
   if (event.target.className === 'modal fade show') {
@@ -34,7 +32,7 @@ const PostDialog = ({
         </div>
         <div className="modal-body">
           <form noValidate>
-            <Field component={TextareaField} name="message" rows="5" placeholder="Сообщение" />
+            <RichTextEditor />
             <div className="mb-4">
               <small className="form-text text-light" />
             </div>
@@ -64,4 +62,4 @@ const mapStateToProps = ({ form }) => ({
   isOpened: form.postForm ? form.postForm.isOpened : false,
 });
 
-export default reduxForm({ validate, form: 'postForm' })(connect(mapStateToProps, mapDispatchToProps)(PostDialog));
+export default connect(mapStateToProps, mapDispatchToProps)(PostDialog);
