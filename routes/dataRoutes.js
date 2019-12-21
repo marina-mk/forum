@@ -105,4 +105,8 @@ module.exports = (app) => {
             response.status(500).send('Internal server error occurred during fetching posts');
         }
     });
+
+    app.post('/api/sections/:sectionId/topics/:topicId/posts', async (request, response) => {
+        response.status(501).send('Not Implemented');
+    });
 };

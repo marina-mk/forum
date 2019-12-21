@@ -47,7 +47,11 @@ export default formReducer.plugin({
       case types.SET_OPENED_POST_FORM_DATA:
         return { ...state, isOpened: true };
       case types.SET_CLOSED_POST_FORM_DATA:
-        return { ...state, isOpened: false };
+        return { isOpened: false };
+      case types.SET_UPDATED_POST_FORM_EDITOR_STATE:
+        return { ...state, editorState: action.payload };
+      case types.SET_ERROR_POST_FORM_DATA:
+          return { ...state, error: action.payload };
       default:
         return state;
     }

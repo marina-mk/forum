@@ -17,4 +17,6 @@ export const SET_CLOSED_TOPIC_FORM_DATA = 'set_closed_topic_form';
 export const SET_ERROR_TOPIC_FORM_DATA = 'set_error_topic_form';
 export const SET_OPENED_POST_FORM_DATA = 'set_opened_post_form';
 export const SET_CLOSED_POST_FORM_DATA = 'set_closed_post_form';
+export const SET_UPDATED_POST_FORM_EDITOR_STATE = 'set_updated_post_form_editor_state';
+export const SET_ERROR_POST_FORM_DATA = 'set_error_post_form';
 export const FETCH_POSTS_DATA = 'fetch_posts';
