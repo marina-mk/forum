@@ -106,7 +106,30 @@ module.exports = (app) => {
         }
     });
 
-    app.post('/api/sections/:sectionId/topics/:topicId/posts', async (request, response) => {
-        response.status(501).send('Not Implemented');
+    app.post('/api/sections/:sectionId/topics/:topicId/posts', requireAuth, async (request, response) => {
+        const { sectionId, topicId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
+        const { message } = request.body;
+
+        try {
+            const user = await User.findOne({ email: request.email });
+            const section = await Section.findOne({ name: sectionId });
+            const topic = await Topic.findOne({ _section: section._id, index: topicIndex }, { "title": 1, "index": 1 });
+            const latestPost = await Post.findOne({ _topic: topic._id }).sort({ index: -1 });
+            const index = latestPost ? latestPost.index + 1 : 0;
+
+            const post = new Post({
+                index,
+                message,
+                _topic: topic._id,
+                _author: user._id,
+                created: Date.now(),
+            });
+
+            await post.save();
+            response.sendStatus(201);
+        } catch (err) {
+            response.status(422).send('Ошибка во время создания нового сообщения. Пожалуйста, повторите попытку позже.');
+        }
     });
 };
