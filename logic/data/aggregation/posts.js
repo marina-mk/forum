@@ -36,7 +36,7 @@ module.exports = (sectionId, topicIndex) => [
     {
         $project: {
             "_id": 1,
-            "body": 1,
+            "message": 1,
             "author.name": 1,
             "created": 1,
             "index": 1,
