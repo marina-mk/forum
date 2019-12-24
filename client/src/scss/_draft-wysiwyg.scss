@@ -1,6 +1,7 @@
 $light: #d5d8db;
 $highlight: #17a2b8;
 $highlight-light: #03d3fc;
+$secondary: #6c757d;
 
 #root {
   .modal-body {
@@ -28,6 +29,25 @@ $highlight-light: #03d3fc;
       border-radius: 0.25rem;
       border-color: $dark-base-color;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $dark-base-color;
+    }
+
+    .rdw-emoji-modal {
+      height: 250px;
+      width: 242px;
+    }
+
+    .rdw-emoji-modal::-webkit-scrollbar {
+      width: 0.5em;
+    }
+     
+    .rdw-emoji-modal::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+     
+    .rdw-emoji-modal::-webkit-scrollbar-thumb {
+      background-color: $secondary;
+      outline: 1px solid slategrey;
+      border-radius: 3px;
     }
 
     .rdw-link-modal {
@@ -80,7 +100,16 @@ $highlight-light: #03d3fc;
       width: unset;
     }
 
-    .rdw-colorpicker-option-active, .rdw-colorpicker-option:active {
+    .rdw-link-modal .rdw-link-modal-btn:hover {
+      box-shadow: none;
+      background-color: #5a6268;
+    }
+
+    .rdw-link-modal .rdw-link-modal-btn:focus {
+      box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+    }
+
+    .rdw-colorpicker-option-active, .rdw-colorpicker-option:active, .rdw-colorpicker-option:hover {
       border: none;
       box-shadow: none;
     }
@@ -90,7 +119,7 @@ $highlight-light: #03d3fc;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $dark-base-color;
     }
 
-    .rdw-colorpicker-option-active .rdw-colorpicker-cube {
+    .rdw-colorpicker-option:hover .rdw-colorpicker-cube, .rdw-colorpicker-option-active .rdw-colorpicker-cube {
       border: 1px solid white;
     }
 
@@ -102,9 +131,43 @@ $highlight-light: #03d3fc;
     .rdw-colorpicker-modal-style-label-active {
       border-bottom: 2px solid $highlight-light;
     }
+
+    @media (max-width: 768px) {
+      .rdw-link-modal, .rdw-colorpicker-modal, .rdw-emoji-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -10px;
+      }
+
+      .rdw-link-modal {
+        margin-left: -125px;
+      }
+
+      .rdw-colorpicker-modal {
+        margin-left: -87.5px;
+      }
+
+      .rdw-emoji-modal {
+        margin-left: -117.5px;
+      }
+    }
   }
 
   .postMessage .public-DraftStyleDefault-block {
     margin: 0;
+  }
+
+  .draftWysiwygEditor a {
+    color: $highlight;
+    cursor: pointer;
+  }
+
+  .draftWysiwygEditor a:hover {
+    color: $highlight-light;
+  }
+
+  .draftWysiwygEditor .rdw-link-decorator-wrapper img {
+    display: none;
   }
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import * as mapDispatchToProps from '../../../actions/modals/post';
 import BackdropFadePortal from '../BackdropFadePortal';
@@ -40,7 +40,7 @@ const PostDialog = ({
             </button>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} autoComplete="off" noValidate>
               <RichTextEditor />
               <div className="mb-4">
                 <small className="form-text text-light">{error}</small>
@@ -60,7 +60,7 @@ const PostDialog = ({
 PostDialog.defaultProps = {
   isOpened: false,
   error: null,
-  richTextEditorState: null,
+  richTextEditorState: EditorState.createEmpty(),
 };
 
 PostDialog.propTypes = {
@@ -78,7 +78,7 @@ PostDialog.propTypes = {
 const mapStateToProps = ({ form }) => ({
   isOpened: form.postForm ? form.postForm.isOpened : false,
   error: form.postForm ? form.postForm.error : null,
-  richTextEditorState: form.postForm ? form.postForm.editorState : null,
+  richTextEditorState: form.postForm ? form.postForm.editorState : EditorState.createEmpty(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDialog);
