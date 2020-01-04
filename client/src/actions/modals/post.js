@@ -26,3 +26,7 @@ export const submitData = (data, sectionId, topicId) => async (dispatch) => {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });
   });
 };
+
+export const updatePostFormError = (error) => (dispatch) => {
+  dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error });
+};

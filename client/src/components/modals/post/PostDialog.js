@@ -8,6 +8,7 @@ import draftToHtml from 'draftjs-to-html';
 import * as mapDispatchToProps from '../../../actions/modals/post';
 import BackdropFadePortal from '../BackdropFadePortal';
 import RichTextEditor from './RichTextEditor';
+import validate from './validate';
 
 const handleOnPortalClick = (event, onClick) => {
   if (event.target.className === 'modal fade show') {
@@ -16,12 +17,21 @@ const handleOnPortalClick = (event, onClick) => {
 };
 
 const PostDialog = ({
-  section, topic, isOpened, closeForm, error, richTextEditorState, submitData,
+  section, topic, isOpened, closeForm, error, richTextEditorState, submitData, updatePostFormError,
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = draftToHtml(convertToRaw(richTextEditorState.getCurrentContent()));
-    submitData(data, section, topic);
+    const validationError = validate({ richTextEditorState });
+
+    if (validationError) {
+      updatePostFormError(validationError);
+      return;
+    }
+
+    const currentContent = richTextEditorState.getCurrentContent();
+    const rawData = convertToRaw(currentContent);
+    const htmlData = draftToHtml(rawData);
+    submitData(htmlData, section, topic);
   };
 
   return (
@@ -73,12 +83,13 @@ PostDialog.propTypes = {
     getCurrentContent: PropTypes.func.isRequired,
   }),
   submitData: PropTypes.func.isRequired,
+  updatePostFormError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ form }) => ({
   isOpened: form.postForm ? form.postForm.isOpened : false,
   error: form.postForm ? form.postForm.error : null,
-  richTextEditorState: form.postForm ? form.postForm.editorState : EditorState.createEmpty(),
+  richTextEditorState: form.postForm ? form.postForm.richTextEditorState : EditorState.createEmpty(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDialog);
