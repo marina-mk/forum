@@ -9,12 +9,18 @@ module.exports = (sectionId, topicIndex) => [
         },
     },
     {
+        $match: { "topic.index": topicIndex },
+    },
+    {
         $lookup: {
             from: "sections",
             localField: "topic._section",
             foreignField: "_id",
             as: "section",
         },
+    },
+    {
+        $match: { "section.name": sectionId },
     },
     {
         $lookup: {
@@ -25,10 +31,7 @@ module.exports = (sectionId, topicIndex) => [
         },
     },
     {
-        $match: { "section.name": sectionId },
-    },
-    {
-        $match: { "topic.index": topicIndex },
+        $unwind: { path: "$author" },
     },
     {
         $sort: { "index": 1 },

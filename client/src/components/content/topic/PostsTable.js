@@ -38,9 +38,9 @@ PostsTable.propTypes = {
     index: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
-    author: PropTypes.arrayOf(PropTypes.shape({
+    author: PropTypes.shape({
       name: PropTypes.string.isRequired,
-    })).isRequired,
+    }).isRequired,
   })).isRequired,
   fetchPosts: PropTypes.func.isRequired,
 };

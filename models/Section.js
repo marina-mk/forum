@@ -7,6 +7,8 @@ const sectionSchema = new Schema({
     index: { type: Number, required: true },
     description: { type: String, required: true },
     name: { type: String, required: true, unique: true },
+    topicsCount: { type: Number, required: true },
+    postsCount: { type: Number, required: true },
 });
 
 mongoose.model('sections', sectionSchema);

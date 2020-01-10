@@ -9,6 +9,7 @@ const topicSchema = new Schema({
     _section: { type: Schema.Types.ObjectId, ref: 'sections' },
     _author: { type: Schema.Types.ObjectId, ref: 'users' },
     created: Date,
+    postsCount: { type: Number, required: true },
 });
 
 mongoose.model('topics', topicSchema);

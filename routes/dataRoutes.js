@@ -3,7 +3,6 @@ require('../models/Section');
 require('../models/Topic');
 require('../models/Post');
 const mongoose = require('mongoose');
-const sectionsPipeline = require('../logic/data/aggregation/sections');
 const topicsPipeline = require('../logic/data/aggregation/topics');
 const postsPipeline = require('../logic/data/aggregation/posts');
 const requireAuth = require('../middlewares/requireAuth');
@@ -16,7 +15,7 @@ const Post = mongoose.model('posts');
 module.exports = (app) => {
     app.get('/api/sections', async (request, response) => {
         try {
-            const sections = await Section.aggregate(sectionsPipeline);
+            const sections = await Section.find().sort({ "index": 1 });
             response.send(sections);
         } catch (err) {
             response.status(500).send('Internal server error occurred during fetching sections');
@@ -66,10 +65,12 @@ module.exports = (app) => {
                 description,
                 _author: user._id,
                 _section: section._id,
+                postsCount: 0,
                 created: Date.now(),
             });
 
             await topic.save();
+            await Section.updateOne({ _id: section._id }, { $inc: { "topicsCount": 1 } });
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания новой темы. Пожалуйста, повторите попытку позже.');
@@ -127,6 +128,8 @@ module.exports = (app) => {
             });
 
             await post.save();
+            await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
+            await Section.updateOne({ _id: section._id }, { $inc: { "postsCount": 1 } });
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания нового сообщения. Пожалуйста, повторите попытку позже.');

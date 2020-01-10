@@ -6,15 +6,15 @@ const UserInfo = ({ author }) => (
   <div className="avatar card col-sm-2">
     <img src={avatarImage} className="card-img" style={{ width: '60px' }} alt="Default avatar" />
     <div className="card-body">
-      <p className="card-text">{author[0].name}</p>
+      <p className="card-text">{author.name}</p>
     </div>
   </div>
 );
 
 UserInfo.propTypes = {
-  author: PropTypes.arrayOf(PropTypes.shape({
+  author: PropTypes.shape({
     name: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
 };
 
 export default UserInfo;
