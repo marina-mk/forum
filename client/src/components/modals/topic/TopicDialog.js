@@ -23,7 +23,7 @@ const TopicDialog = ({
     className={`modal fade ${isOpened ? 'show' : ''}`}
     style={{ display: `${isOpened ? 'block' : 'none'}` }}
     aria-labelledby="topic_modal_label"
-    onClick={(event) => { handleOnPortalClick(event, closeForm); }}
+    onMouseDown={(event) => { handleOnPortalClick(event, closeForm); }}
   >
     <div className="modal-dialog modal-dialog-centered" role="document">
       <div className="modal-content bg-base-color">
