@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../utils/helpers/formatters';
+import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
   _id, index, title, description, created, author, postsCount, views,
@@ -52,7 +52,7 @@ TopicsTable.propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape({
     index: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     created: PropTypes.string.isRequired,
     author: PropTypes.shape({
       name: PropTypes.string.isRequired,

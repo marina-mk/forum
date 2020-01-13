@@ -38,6 +38,28 @@ module.exports = (app) => {
         }
     });
 
+    app.patch('/api/sections/:sectionId', async (request, response) => {
+        const { sectionId } = request.params;
+
+        try {
+            const section = await Section.findOne({ name: sectionId });
+
+            if (!section) {
+                response.status(404).send('Not found section with given id');
+            } else if (request.body.postsCount) {
+                await Section.updateOne({ _id: section._id }, { $inc: { "postsCount": 1 } });
+                response.sendStatus(200);
+            } else if (request.body.topicsCount) {
+                await Section.updateOne({ _id: section._id }, { $inc: { "topicsCount": 1 } });
+                response.sendStatus(200);
+            } else {
+                response.sendStatus(204);
+            }
+        } catch (err) {
+            response.status(500).send('Internal server error occurred during updating section by id');
+        }
+    });
+
     app.get('/api/sections/:sectionId/topics', async (request, response) => {
         const { sectionId } = request.params;
 
@@ -66,11 +88,11 @@ module.exports = (app) => {
                 _author: user._id,
                 _section: section._id,
                 postsCount: 0,
+                views: 0,
                 created: Date.now(),
             });
 
             await topic.save();
-            await Section.updateOne({ _id: section._id }, { $inc: { "topicsCount": 1 } });
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания новой темы. Пожалуйста, повторите попытку позже.');
@@ -105,6 +127,9 @@ module.exports = (app) => {
 
             if (!topic) {
                 response.status(404).send('Not found topic with given id');
+            } else if (request.body.postsCount) {
+                await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
+                response.sendStatus(200);
             } else if (request.body.views) {
                 await Topic.updateOne({ _id: topic._id }, { $inc: { "views": 1 } });
                 response.sendStatus(200);
@@ -149,8 +174,6 @@ module.exports = (app) => {
             });
 
             await post.save();
-            await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
-            await Section.updateOne({ _id: section._id }, { $inc: { "postsCount": 1 } });
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания нового сообщения. Пожалуйста, повторите попытку позже.');

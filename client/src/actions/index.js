@@ -55,7 +55,6 @@ export const dropCurrentTopic = () => (dispatch) => {
 export const fetchPosts = (sectionId, topicId) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}/posts`);
-    await axios.patch(`/api/sections/${sectionId}/topics/${topicId}`, { views: true });
     dispatch({ type: types.FETCH_POSTS_DATA, payload: response.data });
   } catch (err) {}
 };

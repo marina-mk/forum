@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../../actions';
-import { formatTopicsCount, formatPostsCount } from '../../utils/helpers/formatters';
+import { formatTopicsCount, formatPostsCount } from '../../../utils/helpers/formatters';
 
 const renderSections = (sections) => sections.map(({
   _id, title, description, name, topicsCount, postsCount,

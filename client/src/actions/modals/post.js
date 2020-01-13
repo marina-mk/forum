@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as types from '../types';
 import { fetchPosts } from '..';
+import { updateTopicPostsCount, updateSectionPostsCount } from '../../utils/actions/supplementaryRequests';
 
 export const setIsOpenedPostForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_POST_FORM_DATA });
@@ -21,6 +22,8 @@ export const submitData = (data, sectionId, topicId) => async (dispatch) => {
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
       fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
+      updateTopicPostsCount(sectionId, topicId);
+      updateSectionPostsCount(sectionId);
     }
   }).catch((error) => {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });

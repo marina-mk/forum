@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import Post from '../post/Post';
+import { updateTopicViews } from '../../../utils/actions/supplementaryRequests';
 
 const renderPosts = (posts) => posts.map(({
   _id, index, message, created, author,
@@ -18,7 +19,10 @@ const renderPosts = (posts) => posts.map(({
 const PostsTable = ({
   section, topic, posts, fetchPosts,
 }) => {
-  useEffect(() => { fetchPosts(section, topic); }, []);
+  useEffect(() => {
+    fetchPosts(section, topic);
+    updateTopicViews(section, topic);
+  }, []);
 
   return (
     <div className="table-responsive">

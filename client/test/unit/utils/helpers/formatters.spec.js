@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { formatTopicsCount, formatPostsCount, formatTopicViews } from '@/components/utils/helpers/formatters';
+import { formatTopicsCount, formatPostsCount, formatTopicViews } from '@/utils/helpers/formatters';
 
 describe('Helpers: formatters', () => {
   describe('#formatTopicsCount()', () => {

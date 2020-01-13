@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatPostPublishedInfo, formatPostNumInfo } from '../../utils/helpers/formatters';
+import { formatPostPublishedInfo, formatPostNumInfo } from '../../../utils/helpers/formatters';
 import RichTextMessage from './RichTextMessage';
 
 const PostInfo = ({ created, index, message }) => {
