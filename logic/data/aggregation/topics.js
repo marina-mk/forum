@@ -34,6 +34,7 @@ module.exports = (sectionId) => [
             "created": 1,
             "index": 1,
             "postsCount": 1,
+            "views": 1,
         },
     },
 ];

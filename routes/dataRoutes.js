@@ -95,6 +95,27 @@ module.exports = (app) => {
         }
     });
 
+    app.patch('/api/sections/:sectionId/topics/:topicId', async (request, response) => {
+        const { sectionId, topicId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
+
+        try {
+            const section = await Section.findOne({ name: sectionId });
+            const topic = await Topic.findOne({ _section: section._id, index: topicIndex });
+
+            if (!topic) {
+                response.status(404).send('Not found topic with given id');
+            } else if (request.body.views) {
+                await Topic.updateOne({ _id: topic._id }, { $inc: { "views": 1 } });
+                response.sendStatus(200);
+            } else {
+                response.sendStatus(204);
+            }
+        } catch (err) {
+            response.status(500).send('Internal server error occurred during updating topic by id');
+        }
+    });
+
     app.get('/api/sections/:sectionId/topics/:topicId/posts', async (request, response) => {
         const { sectionId, topicId } = request.params;
         const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"

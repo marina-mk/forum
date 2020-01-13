@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { formatTopicsCount, formatPostsCount } from '@/components/utils/helpers/formatters';
+import { formatTopicsCount, formatPostsCount, formatTopicViews } from '@/components/utils/helpers/formatters';
 
 describe('Helpers: formatters', () => {
   describe('#formatTopicsCount()', () => {
@@ -84,6 +84,49 @@ describe('Helpers: formatters', () => {
       it(`should return '${test.expected}' for posts count = ${test.postsCount}`, () => {
         const postsCountStr = formatPostsCount(test.postsCount);
         assert.equal(postsCountStr, test.expected);
+      });
+    });
+  });
+
+  describe('#formatTopicViews()', () => {
+    const tests = [
+      { views: 0, expected: '0 просмотров' },
+      { views: 1, expected: '1 просмотр' },
+      { views: 2, expected: '2 просмотра' },
+      { views: 3, expected: '3 просмотра' },
+      { views: 4, expected: '4 просмотра' },
+      { views: 5, expected: '5 просмотров' },
+      { views: 6, expected: '6 просмотров' },
+      { views: 7, expected: '7 просмотров' },
+      { views: 8, expected: '8 просмотров' },
+      { views: 9, expected: '9 просмотров' },
+      { views: 10, expected: '10 просмотров' },
+      { views: 11, expected: '11 просмотров' },
+      { views: 12, expected: '12 просмотров' },
+      { views: 13, expected: '13 просмотров' },
+      { views: 14, expected: '14 просмотров' },
+      { views: 15, expected: '15 просмотров' },
+      { views: 16, expected: '16 просмотров' },
+      { views: 17, expected: '17 просмотров' },
+      { views: 18, expected: '18 просмотров' },
+      { views: 19, expected: '19 просмотров' },
+      { views: 20, expected: '20 просмотров' },
+      { views: 21, expected: '21 просмотр' },
+      { views: 22, expected: '22 просмотра' },
+      { views: 23, expected: '23 просмотра' },
+      { views: 24, expected: '24 просмотра' },
+      { views: 25, expected: '25 просмотров' },
+      { views: 26, expected: '26 просмотров' },
+      { views: 27, expected: '27 просмотров' },
+      { views: 28, expected: '28 просмотров' },
+      { views: 29, expected: '29 просмотров' },
+      { views: 30, expected: '30 просмотров' },
+    ];
+
+    tests.forEach((test) => {
+      it(`should return '${test.expected}' for views count = ${test.views}`, () => {
+        const topicViewsStr = formatTopicViews(test.views);
+        assert.equal(topicViewsStr, test.expected);
       });
     });
   });

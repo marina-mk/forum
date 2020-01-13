@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import { formatPostsCount, formatTopicInfo } from '../../utils/helpers/formatters';
+import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
-  _id, index, title, description, created, author, postsCount,
+  _id, index, title, description, created, author, postsCount, views,
 }) => {
   const topicInfoStr = formatTopicInfo(created, author);
   const postsCountStr = formatPostsCount(postsCount);
+  const topicViewsStr = formatTopicViews(views);
 
   return (
     <tr key={_id}>
@@ -25,7 +26,7 @@ const renderTopics = (section, topics) => topics.map(({
             <span>{postsCountStr}</span>
             <span>&nbsp;</span>
           </div>
-          <div>0 просмотров</div>
+          <div>{topicViewsStr}</div>
         </div>
       </td>
     </tr>

@@ -24,6 +24,8 @@ export const formatTopicsCount = (topicsCount) => formatCountStr(topicsCount, ['
 
 export const formatPostsCount = (postsCount) => formatCountStr(postsCount, ['сообщений', 'сообщение', 'сообщения']);
 
+export const formatTopicViews = (views) => formatCountStr(views, ['просмотров', 'просмотр', 'просмотра']);
+
 export const formatTopicInfo = (createdDate, author) => {
   const createdFormated = new Date(createdDate).toLocaleString('ru', { dateStyle: "short", timeStyle: "short" });
   return `Автор: ${author.name}, ${createdFormated}`;

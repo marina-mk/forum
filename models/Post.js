@@ -7,7 +7,7 @@ const postSchema = new Schema({
     message: { type: String, required: true },
     _topic: { type: Schema.Types.ObjectId, ref: 'topics' },
     _author: { type: Schema.Types.ObjectId, ref: 'users' },
-    created: Date,
+    created: { type: Date, required: true },
 });
 
 mongoose.model('posts', postSchema);
