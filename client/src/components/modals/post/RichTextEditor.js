@@ -13,8 +13,13 @@ const RichTextEditor = ({
 }) => {
   const validateEditorState = (event) => {
     event.preventDefault();
-    const validationError = validate({ richTextEditorState });
-    updatePostFormError(validationError);
+    setTimeout(() => {
+      if (document.activeElement.getAttribute("type") !== "button"
+        || document.activeElement.getAttribute("class") !== "close") {
+        const validationError = validate({ richTextEditorState });
+        updatePostFormError(validationError);
+      }
+    }, 0);
   };
 
   const cleanErrorState = (event) => {
