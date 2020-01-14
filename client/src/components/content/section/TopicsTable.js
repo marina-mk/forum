@@ -33,8 +33,13 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({ section, topics, fetchTopics }) => {
-  useEffect(() => { fetchTopics(section); }, []);
+const TopicsTable = ({
+  section, topics, fetchTopics, dropTopics,
+}) => {
+  useEffect(() => {
+    fetchTopics(section);
+    return dropTopics;
+  }, []);
 
   return (
     <div className="table-responsive">
@@ -59,6 +64,7 @@ TopicsTable.propTypes = {
     }),
   })).isRequired,
   fetchTopics: PropTypes.func.isRequired,
+  dropTopics: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ topics, currentSection }) => ({ topics, currentSection });

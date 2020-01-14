@@ -41,6 +41,10 @@ export const fetchTopics = (sectionId) => async (dispatch) => {
   } catch (err) {}
 };
 
+export const dropTopics = () => async (dispatch) => {
+  dispatch({ type: types.DROP_TOPICS_DATA });
+};
+
 export const fetchCurrentTopic = (sectionId, topicId) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}`);
@@ -57,4 +61,8 @@ export const fetchPosts = (sectionId, topicId) => async (dispatch) => {
     const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}/posts`);
     dispatch({ type: types.FETCH_POSTS_DATA, payload: response.data });
   } catch (err) {}
+};
+
+export const dropPosts = () => async (dispatch) => {
+  dispatch({ type: types.DROP_POSTS_DATA });
 };

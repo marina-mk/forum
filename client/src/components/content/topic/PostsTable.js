@@ -17,11 +17,12 @@ const renderPosts = (posts) => posts.map(({
 ));
 
 const PostsTable = ({
-  section, topic, posts, fetchPosts,
+  section, topic, posts, fetchPosts, dropPosts,
 }) => {
   useEffect(() => {
     fetchPosts(section, topic);
     updateTopicViews(section, topic);
+    return dropPosts;
   }, []);
 
   return (
@@ -47,6 +48,7 @@ PostsTable.propTypes = {
     }).isRequired,
   })).isRequired,
   fetchPosts: PropTypes.func.isRequired,
+  dropPosts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ posts }) => ({ posts });
