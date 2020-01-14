@@ -8,7 +8,7 @@ const PostInfo = ({ created, index, message }) => {
   const numInfoStr = formatPostNumInfo(index);
 
   return (
-    <div className="col-sm-10">
+    <div className="postBody col-sm-10">
       <div className="postInfo">
         <div>{publishedInfoStr}</div>
         <div>{numInfoStr}</div>

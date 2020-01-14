@@ -7,6 +7,7 @@ const UserInfo = ({ author }) => (
     <img src={avatarImage} className="card-img" style={{ width: '60px' }} alt="Default avatar" />
     <div className="card-body">
       <p className="card-text">{author.name}</p>
+      <p className="card-text">0 тем, 10000&nbsp;сообщений</p>
     </div>
   </div>
 );
