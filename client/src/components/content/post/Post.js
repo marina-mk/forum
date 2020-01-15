@@ -18,6 +18,8 @@ Post.propTypes = {
   created: PropTypes.string.isRequired,
   author: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    topicsCount: PropTypes.number.isRequired,
+    postsCount: PropTypes.number.isRequired,
   }).isRequired,
 };
 

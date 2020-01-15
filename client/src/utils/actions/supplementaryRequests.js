@@ -24,3 +24,15 @@ export const updateTopicViews = (sectionId, topicId) => {
     axios.patch(`/api/sections/${sectionId}/topics/${topicId}`, { views: true });
   } catch (err) {}
 };
+
+export const updateUserTopicsCount = () => {
+  try {
+    axios.patch(`/api/user`, { topicsCount: true });
+  } catch (err) {}
+};
+
+export const updateUserPostsCount = () => {
+  try {
+    axios.patch(`/api/user`, { postsCount: true });
+  } catch (err) {}
+};

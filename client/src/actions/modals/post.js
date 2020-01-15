@@ -1,7 +1,11 @@
 import axios from 'axios';
 import * as types from '../types';
 import { fetchPosts } from '..';
-import { updateTopicPostsCount, updateSectionPostsCount } from '../../utils/actions/supplementaryRequests';
+import {
+  updateTopicPostsCount,
+  updateSectionPostsCount,
+  updateUserPostsCount,
+} from '../../utils/actions/supplementaryRequests';
 
 export const setIsOpenedPostForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_POST_FORM_DATA });
@@ -21,6 +25,7 @@ export const submitData = (data, sectionId, topicId) => async (dispatch) => {
   axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values).then((response) => {
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
+      updateUserPostsCount();
       fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
       updateTopicPostsCount(sectionId, topicId);
       updateSectionPostsCount(sectionId);

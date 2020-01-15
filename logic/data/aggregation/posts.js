@@ -41,6 +41,8 @@ module.exports = (sectionId, topicIndex) => [
             "_id": 1,
             "message": 1,
             "author.name": 1,
+            "author.topicsCount": 1,
+            "author.postsCount": 1,
             "created": 1,
             "index": 1,
         },

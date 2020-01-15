@@ -38,7 +38,7 @@ module.exports = (app) => {
         }
     });
 
-    app.patch('/api/sections/:sectionId', async (request, response) => {
+    app.patch('/api/sections/:sectionId', requireAuth, async (request, response) => {
         const { sectionId } = request.params;
 
         try {
@@ -117,7 +117,7 @@ module.exports = (app) => {
         }
     });
 
-    app.patch('/api/sections/:sectionId/topics/:topicId', async (request, response) => {
+    app.patch('/api/sections/:sectionId/topics/:topicId', requireAuth, async (request, response) => {
         const { sectionId, topicId } = request.params;
         const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
 
