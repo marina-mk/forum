@@ -31,8 +31,8 @@ export const updateUserTopicsCount = () => {
   } catch (err) {}
 };
 
-export const updateUserPostsCount = () => {
+export const updateUserPostsCount = async () => {
   try {
-    axios.patch(`/api/user`, { postsCount: true });
+    await axios.patch(`/api/user`, { postsCount: true });
   } catch (err) {}
 };

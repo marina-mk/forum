@@ -22,13 +22,13 @@ export const updatePostFormEditorState = (editorState) => (dispatch) => {
 export const submitData = (data, sectionId, topicId) => async (dispatch) => {
   const values = { message: data };
 
-  axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values).then((response) => {
+  axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values).then(async (response) => {
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
-      updateUserPostsCount();
-      fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
       updateTopicPostsCount(sectionId, topicId);
       updateSectionPostsCount(sectionId);
+      await updateUserPostsCount();
+      fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
     }
   }).catch((error) => {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });
