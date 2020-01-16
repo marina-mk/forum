@@ -117,7 +117,7 @@ module.exports = (app) => {
         }
     });
 
-    app.patch('/api/sections/:sectionId/topics/:topicId', requireAuth, async (request, response) => {
+    app.patch('/api/sections/:sectionId/topics/:topicId', async (request, response) => {
         const { sectionId, topicId } = request.params;
         const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
 
@@ -128,8 +128,10 @@ module.exports = (app) => {
             if (!topic) {
                 response.status(404).send('Not found topic with given id');
             } else if (request.body.postsCount) {
-                await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
-                response.sendStatus(200);
+                requireAuth(request, response, async () => {
+                    await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
+                    response.sendStatus(200);
+                });
             } else if (request.body.views) {
                 await Topic.updateOne({ _id: topic._id }, { $inc: { "views": 1 } });
                 response.sendStatus(200);
