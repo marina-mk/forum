@@ -5,6 +5,10 @@ const MIN_PASSWORD_LENGTH = 6;
 export default (values) => {
   const errors = {};
 
+  if (values.name && values.name.trim().length === 0) {
+    errors.name = 'Имя пользователя должно быть не пустым';
+  }
+
   if (!EMAIL_REGEXP.test(values.email)) {
     errors.email = 'Введите корректный email';
   }
