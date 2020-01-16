@@ -1,12 +1,17 @@
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEXP = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const MIN_PASSWORD_LENGTH = 6;
+const MAX_NAME_LENGTH = 40;
 
 export default (values) => {
   const errors = {};
 
   if (values.name && values.name.trim().length === 0) {
     errors.name = 'Имя пользователя должно быть не пустым';
+  }
+
+  if (values.name && values.name.length > MAX_NAME_LENGTH) {
+    errors.name = 'Имя пользователя не должно превышать 40 символов';
   }
 
   if (!EMAIL_REGEXP.test(values.email)) {

@@ -248,6 +248,10 @@ body {
           .card-body {
             padding: 0 1rem;
             align-items: flex-start;
+
+            .card-text {
+              text-align: start;
+            }
           }
         }
 
