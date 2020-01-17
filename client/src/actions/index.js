@@ -27,7 +27,11 @@ export const fetchCurrentSection = (sectionId) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/sections/${sectionId}`);
     dispatch({ type: types.FETCH_CURRENT_SECTION_DATA, payload: response.data });
-  } catch (err) {}
+  } catch (err) {
+    if (err.response.status === 404) {
+      dispatch({ type: types.FETCH_CURRENT_SECTION_DATA, payload: { error: 'Раздел не найден' } });
+    }
+  }
 };
 
 export const dropCurrentSection = () => (dispatch) => {
@@ -49,7 +53,11 @@ export const fetchCurrentTopic = (sectionId, topicId) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}`);
     dispatch({ type: types.FETCH_CURRENT_TOPIC_DATA, payload: response.data });
-  } catch (err) {}
+  } catch (err) {
+    if (err.response.status === 404) {
+      dispatch({ type: types.FETCH_CURRENT_TOPIC_DATA, payload: { error: 'Тема не найдена' } });
+    }
+  }
 };
 
 export const dropCurrentTopic = () => (dispatch) => {

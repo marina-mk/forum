@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import Post from '../post/Post';
+import PostsTableInfo from './PostsTableInfo';
 import { updateTopicViews } from '../../../utils/actions/supplementaryRequests';
 
 const renderPosts = (posts) => posts.map(({
@@ -32,6 +33,7 @@ const PostsTable = ({
           {renderPosts(posts)}
         </tbody>
       </table>
+      <PostsTableInfo />
     </div>
   );
 };

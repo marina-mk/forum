@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 const Breadcrumbs = ({ currentSection, currentTopic }) => (
   <div className="breadcrumbs">
     <Link to="/">Главная</Link>
-    {currentSection && <Link to={`/${currentSection.name}`}>{currentSection.title}</Link>}
-    {currentSection && currentTopic
+    {currentSection && currentSection.name && currentSection.title
+      && <Link to={`/${currentSection.name}`}>{currentSection.title}</Link>}
+    {currentSection && currentSection.name && currentTopic && currentTopic.index && currentTopic.title
       && <Link to={`/${currentSection.name}/topic-${currentTopic.index + 1}`}>{currentTopic.title}</Link>}
   </div>
 );
@@ -19,12 +20,14 @@ Breadcrumbs.defaultProps = {
 
 Breadcrumbs.propTypes = {
   currentSection: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    name: PropTypes.string,
+    error: PropTypes.string,
   }),
   currentTopic: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    index: PropTypes.number,
+    error: PropTypes.string,
   }),
 };
 

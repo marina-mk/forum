@@ -3,12 +3,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/modals/post';
 
-const PostButton = ({ setIsOpenedPostForm }) => (
-  <button type="button" className="topic-button btn" onClick={setIsOpenedPostForm}>Ответить</button>
-);
+const PostButton = ({ setIsOpenedPostForm, currentTopic }) => {
+  if (currentTopic && !currentTopic.error) {
+    return (
+      <button type="button" className="topic-button btn" onClick={setIsOpenedPostForm}>Ответить</button>
+    );
+  }
+
+  return (<></>);
+};
+
+PostButton.defaultProps = {
+  currentTopic: null,
+};
 
 PostButton.propTypes = {
   setIsOpenedPostForm: PropTypes.func.isRequired,
+  currentTopic: PropTypes.shape({
+    error: PropTypes.string,
+  }),
 };
 
-export default connect(null, actions)(PostButton);
+const mapStateToProps = ({ currentTopic }) => ({ currentTopic });
+
+export default connect(mapStateToProps, actions)(PostButton);

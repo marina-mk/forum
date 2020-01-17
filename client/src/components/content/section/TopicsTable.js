@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import TopicsTableInfo from './TopicsTableInfo';
 import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
@@ -48,6 +49,7 @@ const TopicsTable = ({
           {renderTopics(section, topics)}
         </tbody>
       </table>
+      <TopicsTableInfo />
     </div>
   );
 };
@@ -67,6 +69,6 @@ TopicsTable.propTypes = {
   dropTopics: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ topics, currentSection }) => ({ topics, currentSection });
+const mapStateToProps = ({ topics }) => ({ topics });
 
 export default connect(mapStateToProps, actions)(TopicsTable);
