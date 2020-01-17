@@ -1,5 +1,8 @@
 @import 'custom';
-@import 'draft-wysiwyg';
+@import 'components/modals.scss';
+@import 'components/data-tables.scss';
+@import 'components/breadcrumbs.scss';
+@import 'components/draft-wysiwyg';
 @import '~bootstrap/scss/bootstrap';
 $fa-font-path: '~font-awesome/fonts/';
 @import '~font-awesome/scss/font-awesome';
