@@ -8,7 +8,7 @@ const Breadcrumbs = ({ currentSection, currentTopic }) => (
     <Link to="/">Главная</Link>
     {currentSection && currentSection.name && currentSection.title
       && <Link to={`/${currentSection.name}`}>{currentSection.title}</Link>}
-    {currentSection && currentSection.name && currentTopic && currentTopic.index && currentTopic.title
+    {currentSection && currentSection.name && currentTopic && currentTopic.title
       && <Link to={`/${currentSection.name}/topic-${currentTopic.index + 1}`}>{currentTopic.title}</Link>}
   </div>
 );

@@ -1,4 +1,8 @@
 #root {
+  table {
+    margin: 0;
+  }
+
   table.sections, table.topics {
     td {
       display: flex;
@@ -78,7 +82,7 @@
     text-align: center;
     color: $light;
     border: 1px solid #454d55;
-    margin: 0 20%;
+    margin: 1rem 20%;
     padding: 2rem;
 
     a {
@@ -92,7 +96,7 @@
 
   @media (max-width: 768px) {
     .topics-table-info, .posts-table-info {
-      margin: 0 1rem;
+      margin: 1rem;
       padding: 2rem;
     }
   }
