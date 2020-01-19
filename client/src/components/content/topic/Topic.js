@@ -3,13 +3,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import Breadcrumbs from '../common/Breadcrumbs';
+import TopicNavbar from './TopicNavbar';
+import TopicBottomNavbar from './TopicBottomNavbar';
 import PostsTable from './PostsTable';
-import PostButton from './PostButton';
-import requireAuth from '../../utils/requireAuth';
 import PostDialog from '../../modals/post/PostDialog';
-
-const PostButtonRequireAuth = requireAuth(PostButton);
 
 const Topic = ({
   match: { params: { section, topic } },
@@ -21,11 +18,9 @@ const Topic = ({
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs />
-        <PostButtonRequireAuth />
-      </nav>
+      <TopicNavbar />
       <PostsTable section={section} topic={topic} />
+      <TopicBottomNavbar />
       <PostDialog section={section} topic={topic} />
     </>
   );

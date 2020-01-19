@@ -3,13 +3,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import Breadcrumbs from '../common/Breadcrumbs';
-import TopicButton from './TopicButton';
+import SectionNavbar from './SectionNavbar';
+import SectionBottomNavbar from './SectionBottomNavbar';
 import TopicsTable from './TopicsTable';
 import TopicDialog from '../../modals/topic/TopicDialog';
-import requireAuth from '../../utils/requireAuth';
-
-const TopicButtonRequireAuth = requireAuth(TopicButton);
 
 const Section = ({ match: { params: { section } }, fetchCurrentSection, dropCurrentTopic }) => {
   useEffect(() => {
@@ -19,11 +16,9 @@ const Section = ({ match: { params: { section } }, fetchCurrentSection, dropCurr
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark-nav-color">
-        <Breadcrumbs />
-        <TopicButtonRequireAuth />
-      </nav>
+      <SectionNavbar />
       <TopicsTable section={section} />
+      <SectionBottomNavbar />
       <TopicDialog section={section} />
     </>
   );
