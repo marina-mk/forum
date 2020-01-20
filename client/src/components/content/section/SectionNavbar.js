@@ -6,7 +6,7 @@ import requireAuth from '../../utils/requireAuth';
 const TopicButtonRequireAuth = requireAuth(TopicButton);
 
 const SectionNavbar = () => (
-  <nav id="section_navbar" className="navbar navbar-dark bg-dark-nav-color">
+  <nav id="section_navbar" className="section navbar navbar-dark bg-dark-nav-color">
     <Breadcrumbs />
     <TopicButtonRequireAuth />
   </nav>

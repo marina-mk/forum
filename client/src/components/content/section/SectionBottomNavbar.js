@@ -24,7 +24,7 @@ const SectionBottomNavbar = ({ topics }) => {
 
   if (isVisible) {
     return (
-      <nav className="navbar navbar-dark bg-dark-nav-color bottom">
+      <nav className="section bottom navbar navbar-dark bg-dark-nav-color">
         <TopicButtonRequireAuth />
       </nav>
     );

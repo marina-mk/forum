@@ -24,7 +24,7 @@ const TopicBottomNavbar = ({ posts }) => {
 
   if (isVisible) {
     return (
-      <nav className="navbar navbar-dark bg-dark-nav-color bottom">
+      <nav className="topic bottom navbar navbar-dark bg-dark-nav-color">
         <PostButtonRequireAuth />
       </nav>
     );

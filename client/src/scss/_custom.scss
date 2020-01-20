@@ -36,6 +36,10 @@ body {
     cursor: pointer;
   }
 
+  .section.navbar, .topic.navbar {
+    min-height: 54px;
+  }
+
   .footer a:hover {
     color: rgba(255, 255, 255, 0.7) !important;
   }
