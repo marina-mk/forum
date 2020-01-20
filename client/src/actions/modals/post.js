@@ -19,9 +19,10 @@ export const updatePostFormEditorState = (editorState) => (dispatch) => {
   dispatch({ type: types.SET_UPDATED_POST_FORM_EDITOR_STATE, payload: editorState });
 };
 
-export const submitData = (data, sectionId, topicId) => async (dispatch) => {
+export const submitData = (data, sectionId, topicId, setSending) => async (dispatch) => {
   const values = { message: data };
 
+  setSending(true);
   axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values).then(async (response) => {
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
@@ -32,6 +33,8 @@ export const submitData = (data, sectionId, topicId) => async (dispatch) => {
     }
   }).catch((error) => {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });
+  }).finally(() => {
+    setSending(false);
   });
 };
 

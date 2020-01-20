@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import BackdropFadePortal from '../BackdropFadePortal';
@@ -20,37 +20,47 @@ const renderFields = (fields) => fields.map((props, i) => (
 const AuthDialog = ({
   fields, modalId, modalTitle, completeButtonLabel, isOpened,
   error, handleSubmit, submitAuthData, action, closeForm,
-}) => (
-  <div
-    className={`modal fade ${isOpened ? 'show' : ''}`}
-    style={{ display: `${isOpened ? 'block' : 'none'}` }}
-    aria-labelledby={`${modalId}_label`}
-    onMouseDown={(event) => { handleOnPortalClick(event, closeForm); }}
-  >
-    <div className="modal-dialog modal-dialog-centered" role="document">
-      <div className="modal-content bg-base-color">
-        <div className="modal-header bg-dark text-muted">
-          <h5 className="modal-title" id={`${modalId}_label`}>{modalTitle}</h5>
-          <button type="button" className="close" aria-label="Close" onClick={closeForm}>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          <form onSubmit={handleSubmit((values) => submitAuthData(values, action))} noValidate>
-            {renderFields(fields)}
-            <div className="mb-4">
-              <small className="form-text text-light">{error}</small>
-            </div>
-            <div>
-              <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
-            </div>
-          </form>
+}) => {
+  const [isSending, setSending] = useState(false);
+
+  const handleSubmittingData = (values) => {
+    if (isSending) return;
+
+    submitAuthData(values, action, setSending);
+  };
+
+  return (
+    <div
+      className={`modal fade ${isOpened ? 'show' : ''}`}
+      style={{ display: `${isOpened ? 'block' : 'none'}` }}
+      aria-labelledby={`${modalId}_label`}
+      onMouseDown={(event) => { handleOnPortalClick(event, closeForm); }}
+    >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content bg-base-color">
+          <div className="modal-header bg-dark text-muted">
+            <h5 className="modal-title" id={`${modalId}_label`}>{modalTitle}</h5>
+            <button type="button" className="close" aria-label="Close" onClick={closeForm}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleSubmit(handleSubmittingData)} noValidate>
+              {renderFields(fields)}
+              <div className="mb-4">
+                <small className="form-text text-light">{error}</small>
+              </div>
+              <div>
+                <button type="submit" className="btn btn-secondary">{completeButtonLabel}</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+      <BackdropFadePortal isOpened={isOpened} />
     </div>
-    <BackdropFadePortal isOpened={isOpened} />
-  </div>
-);
+  );
+};
 
 AuthDialog.defaultProps = {
   isOpened: false,

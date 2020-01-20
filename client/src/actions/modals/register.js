@@ -5,7 +5,8 @@ export const setIsOpenedRegisterForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_REGISTER_FORM_DATA });
 };
 
-export const submitAuthData = (values, path) => async (dispatch) => {
+export const submitAuthData = (values, path, setSending) => async (dispatch) => {
+  setSending(true);
   axios.post(path, values).then((response) => {
     if (response.status === 201) {
       dispatch({ type: types.FETCH_USER_DATA, payload: response.data });
@@ -13,6 +14,8 @@ export const submitAuthData = (values, path) => async (dispatch) => {
     }
   }).catch((error) => {
     dispatch({ type: types.SET_ERROR_REGISTER_FORM_DATA, payload: error.response.data });
+  }).finally(() => {
+    setSending(false);
   });
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EditorState, convertToRaw } from 'draft-js';
@@ -19,8 +19,11 @@ const handleOnPortalClick = (event, onClick) => {
 const PostDialog = ({
   section, topic, isOpened, closeForm, error, richTextEditorState, submitData, updatePostFormError,
 }) => {
+  const [isSending, setSending] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (isSending) return;
     const validationError = validate({ richTextEditorState });
 
     if (validationError) {
@@ -31,7 +34,7 @@ const PostDialog = ({
     const currentContent = richTextEditorState.getCurrentContent();
     const rawData = convertToRaw(currentContent);
     const htmlData = draftToHtml(rawData);
-    submitData(htmlData, section, topic);
+    submitData(htmlData, section, topic, setSending);
   };
 
   return (
