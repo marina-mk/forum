@@ -28,7 +28,7 @@ const PostsTable = ({
 
   return (
     <div className="table-responsive">
-      <table className="posts table table-hover table-dark text-light font-size-small">
+      <table id="posts_table" className="posts table table-hover table-dark text-light font-size-small">
         <tbody>
           {renderPosts(posts)}
         </tbody>

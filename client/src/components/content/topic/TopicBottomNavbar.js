@@ -11,11 +11,14 @@ const TopicBottomNavbar = ({ posts }) => {
   const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
+    const navbarEl = document.getElementById('topic_navbar');
+    const postsTableEl = document.getElementById('posts_table');
     const footerEl = document.getElementById('footer');
     const footerRect = footerEl.getBoundingClientRect();
     const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
     const isFooterHidden = footerRect.bottom < 0 || footerRect.top - viewHeight >= 0;
-    const isTopicBottomNavbarVisible = posts.length && isFooterHidden;
+    const isContentFit = navbarEl.clientHeight + postsTableEl.clientHeight < viewHeight;
+    const isTopicBottomNavbarVisible = posts.length && isFooterHidden && !isContentFit;
     setVisible(isTopicBottomNavbarVisible);
   });
 

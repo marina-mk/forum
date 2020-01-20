@@ -44,7 +44,7 @@ const TopicsTable = ({
 
   return (
     <div className="table-responsive">
-      <table className="topics table table-hover table-dark text-light font-size-small">
+      <table id="topics_table" className="topics table table-hover table-dark text-light font-size-small">
         <tbody>
           {renderTopics(section, topics)}
         </tbody>

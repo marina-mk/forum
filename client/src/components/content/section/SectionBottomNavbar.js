@@ -11,11 +11,14 @@ const SectionBottomNavbar = ({ topics }) => {
   const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
+    const navbarEl = document.getElementById('section_navbar');
+    const topicsTableEl = document.getElementById('topics_table');
     const footerEl = document.getElementById('footer');
     const footerRect = footerEl.getBoundingClientRect();
     const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
     const isFooterHidden = footerRect.bottom < 0 || footerRect.top - viewHeight >= 0;
-    const isSectionBottomNavbarVisible = topics.length && isFooterHidden;
+    const isContentFit = navbarEl.clientHeight + topicsTableEl.clientHeight < viewHeight;
+    const isSectionBottomNavbarVisible = topics.length && isFooterHidden && !isContentFit;
     setVisible(isSectionBottomNavbarVisible);
   });
 
