@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import TopicsTableInfo from './TopicsTableInfo';
 import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
@@ -34,25 +33,15 @@ const renderTopics = (section, topics) => topics.map(({
   );
 });
 
-const TopicsTable = ({
-  section, topics, fetchTopics, dropTopics,
-}) => {
-  useEffect(() => {
-    fetchTopics(section);
-    return dropTopics;
-  }, []);
-
-  return (
-    <div className="table-responsive">
-      <table id="topics_table" className="topics table table-hover table-dark text-light font-size-small">
-        <tbody>
-          {renderTopics(section, topics)}
-        </tbody>
-      </table>
-      <TopicsTableInfo />
-    </div>
-  );
-};
+const TopicsTable = ({ section, topics }) => (
+  <div className="table-responsive">
+    <table id="topics_table" className="topics table table-hover table-dark text-light font-size-small">
+      <tbody>
+        {renderTopics(section, topics)}
+      </tbody>
+    </table>
+  </div>
+);
 
 TopicsTable.propTypes = {
   section: PropTypes.string.isRequired,
@@ -65,8 +54,6 @@ TopicsTable.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   })).isRequired,
-  fetchTopics: PropTypes.func.isRequired,
-  dropTopics: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ topics }) => ({ topics });

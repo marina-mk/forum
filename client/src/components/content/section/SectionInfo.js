@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const TopicsTableInfo = ({ currentSection, topics }) => {
+const SectionInfo = ({ currentSection, topics, isLoaded }) => {
   let info;
 
   if (currentSection) {
-    info = currentSection.error || ((!Array.isArray(topics) || !topics.length) && 'Нет тем');
+    info = currentSection.error || (isLoaded && !topics.length && 'Нет тем');
   }
 
   if (info) {
@@ -22,11 +22,11 @@ const TopicsTableInfo = ({ currentSection, topics }) => {
   return (<></>);
 };
 
-TopicsTableInfo.defaultProps = {
+SectionInfo.defaultProps = {
   currentSection: null,
 };
 
-TopicsTableInfo.propTypes = {
+SectionInfo.propTypes = {
   currentSection: PropTypes.shape({
     error: PropTypes.string,
   }),
@@ -39,8 +39,9 @@ TopicsTableInfo.propTypes = {
       name: PropTypes.string.isRequired,
     }),
   })).isRequired,
+  isLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ currentSection, topics }) => ({ currentSection, topics });
 
-export default connect(mapStateToProps)(TopicsTableInfo);
+export default connect(mapStateToProps)(SectionInfo);

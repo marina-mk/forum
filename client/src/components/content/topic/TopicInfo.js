@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const PostsTableInfo = ({ currentTopic, posts }) => {
+const TopicInfo = ({ currentTopic, posts, isLoaded }) => {
   let info;
 
   if (currentTopic) {
-    info = currentTopic.error || ((!Array.isArray(posts) || !posts.length) && 'Нет сообщений');
+    info = currentTopic.error || (isLoaded && !posts.length && 'Нет сообщений');
   }
 
   if (info) {
@@ -22,11 +22,11 @@ const PostsTableInfo = ({ currentTopic, posts }) => {
   return (<></>);
 };
 
-PostsTableInfo.defaultProps = {
+TopicInfo.defaultProps = {
   currentTopic: null,
 };
 
-PostsTableInfo.propTypes = {
+TopicInfo.propTypes = {
   currentTopic: PropTypes.shape({
     error: PropTypes.string,
   }),
@@ -40,8 +40,9 @@ PostsTableInfo.propTypes = {
       postsCount: PropTypes.number.isRequired,
     }).isRequired,
   })).isRequired,
+  isLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ currentTopic, posts }) => ({ currentTopic, posts });
 
-export default connect(mapStateToProps)(PostsTableInfo);
+export default connect(mapStateToProps)(TopicInfo);

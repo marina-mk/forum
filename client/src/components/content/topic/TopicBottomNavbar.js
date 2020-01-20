@@ -7,7 +7,7 @@ import requireAuth from '../../utils/requireAuth';
 
 const PostButtonRequireAuth = requireAuth(PostButton);
 
-const TopicBottomNavbar = ({ posts }) => {
+const TopicBottomNavbar = ({ posts, isLoaded }) => {
   const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const TopicBottomNavbar = ({ posts }) => {
     const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
     const isFooterHidden = footerRect.bottom < 0 || footerRect.top - viewHeight >= 0;
     const isContentFit = navbarEl.clientHeight + postsTableEl.clientHeight < viewHeight;
-    const isTopicBottomNavbarVisible = posts.length && isFooterHidden && !isContentFit;
+    const isTopicBottomNavbarVisible = isLoaded && posts.length && isFooterHidden && !isContentFit;
     setVisible(isTopicBottomNavbarVisible);
   });
 
@@ -36,6 +36,7 @@ const TopicBottomNavbar = ({ posts }) => {
 TopicBottomNavbar.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
   })).isRequired,
+  isLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ posts }) => ({ posts });
