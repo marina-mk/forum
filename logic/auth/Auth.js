@@ -10,7 +10,7 @@ class Auth {
     }
 
     sendUserdata(user, status = 200) {
-        this.response.status(status).send({ name: user.name });
+        this.response.status(status).send({ name: user.name, role: user.role });
     }
 
     sendWebtoken(user, status) {

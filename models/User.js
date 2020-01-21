@@ -10,6 +10,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     topicsCount: { type: Number, required: true },
     postsCount: { type: Number, required: true },
+    role: { type: String, required: true },
 });
 
 userSchema.pre('save', function pre(next) {

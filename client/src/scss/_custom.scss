@@ -48,13 +48,17 @@ body {
     min-height: 100vh;
   }
 
-  .topic-button {
+  .delete-button {
+    background-color: #343a40;
+  }
+
+  .topic-button, .post-button, .delete-button {
     color: $highlight;
     border-color: $highlight;
     box-shadow: none;
   }
 
-  .topic-button:hover {
+  .topic-button:hover, .post-button:hover, .delete-button:hover {
     color: $highlight-light;
     border-color: $highlight-light;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $dark-base-color;

@@ -125,6 +125,11 @@
         }
       }
 
+      .postBody nav {
+        display: flex;
+        justify-content: flex-end;
+      }
+
       @media (max-width: 992px) {
         .avatar.col-sm-2 {
           flex: 0 0 20%;

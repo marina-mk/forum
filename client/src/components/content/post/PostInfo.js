@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatPostPublishedInfo, formatPostNumInfo } from '../../../utils/helpers/formatters';
 import RichTextMessage from './RichTextMessage';
+import DeleteButton from './DeleteButton';
+import requireAdmin from '../../utils/requireAdmin';
+
+const DeleteButtonRequireAdmin = requireAdmin(DeleteButton);
 
 const PostInfo = ({ created, index, message }) => {
   const publishedInfoStr = formatPostPublishedInfo(created);
@@ -14,6 +18,9 @@ const PostInfo = ({ created, index, message }) => {
         <div>{numInfoStr}</div>
       </div>
       <RichTextMessage message={message} />
+      <nav>
+        <DeleteButtonRequireAdmin />
+      </nav>
     </div>
   );
 };

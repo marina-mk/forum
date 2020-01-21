@@ -6,7 +6,7 @@ import * as actions from '../../../actions/modals/post';
 const PostButton = ({ setIsOpenedPostForm, currentTopic }) => {
   if (currentTopic && !currentTopic.error) {
     return (
-      <button type="button" className="topic-button btn" onClick={setIsOpenedPostForm}>Ответить</button>
+      <button type="button" className="post-button btn" onClick={setIsOpenedPostForm}>Ответить</button>
     );
   }
 
