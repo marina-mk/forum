@@ -9,18 +9,21 @@ export const setIsOpenedTopicForm = () => (dispatch) => {
 
 export const submitData = (values, sectionId, setSending) => async (dispatch) => {
   setSending(true);
-  axios.post(`/api/sections/${sectionId}/topics`, values).then((response) => {
+
+  try {
+    const response = await axios.post(`/api/sections/${sectionId}/topics`, values);
+
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_TOPIC_FORM_DATA });
       fetchTopics(sectionId)(dispatch); // call subsequent action to fetch topics (method GET)
       updateSectionTopicsCount(sectionId);
       updateUserTopicsCount();
     }
-  }).catch((error) => {
+  } catch (error) {
     dispatch({ type: types.SET_ERROR_TOPIC_FORM_DATA, payload: error.response.data });
-  }).finally(() => {
+  } finally {
     setSending(false);
-  });
+  }
 };
 
 export const closeForm = () => (dispatch) => {

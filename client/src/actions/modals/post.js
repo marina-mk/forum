@@ -23,7 +23,10 @@ export const submitData = (data, sectionId, topicId, setSending) => async (dispa
   const values = { message: data };
 
   setSending(true);
-  axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values).then(async (response) => {
+
+  try {
+    const response = await axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values);
+
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
       updateTopicPostsCount(sectionId, topicId);
@@ -31,11 +34,11 @@ export const submitData = (data, sectionId, topicId, setSending) => async (dispa
       await updateUserPostsCount();
       fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
     }
-  }).catch((error) => {
+  } catch (error) {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });
-  }).finally(() => {
+  } finally {
     setSending(false);
-  });
+  }
 };
 
 export const updatePostFormError = (error) => (dispatch) => {
