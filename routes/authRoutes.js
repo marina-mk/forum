@@ -29,15 +29,18 @@ module.exports = (app) => {
         new Logout(request, response).execute();
     });
 
-    app.patch('/api/user', requireAuth, async (request, response) => {
-        try {
-            const user = await User.findOne({ email: request.email });
+    app.patch('/api/users/:username', requireAuth, async (request, response) => {
+        const { username } = request.params;
+        const { topicsCount, postsCount } = request.body;
 
-            if (request.body.postsCount) {
-                await User.updateOne({ _id: user._id }, { $inc: { "postsCount": 1 } });
+        try {
+            const user = await User.findOne({ name: username });
+
+            if (postsCount) {
+                await User.updateOne({ _id: user._id }, { $inc: { "postsCount": postsCount } });
                 response.sendStatus(200);
-            } else if (request.body.topicsCount) {
-                await User.updateOne({ _id: user._id }, { $inc: { "topicsCount": 1 } });
+            } else if (topicsCount) {
+                await User.updateOne({ _id: user._id }, { $inc: { "topicsCount": topicsCount } });
                 response.sendStatus(200);
             } else {
                 response.sendStatus(204);

@@ -34,7 +34,7 @@ class Registration extends Auth {
 
     saveUser(next) {
         const { name, email, password } = this.data;
-        const user = new User({ name, email, password, topicsCount: 0, postsCount: 0 });
+        const user = new User({ name, email, password, topicsCount: 0, postsCount: 0, role: 'user' });
 
         user.save((error) => {
             if (error) {

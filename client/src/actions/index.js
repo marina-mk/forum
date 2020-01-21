@@ -1,6 +1,11 @@
 /* eslint-disable no-empty */
 import axios from 'axios';
 import * as types from './types';
+import {
+  updateTopicPostsCount,
+  updateSectionPostsCount,
+  updateUserPostsCount,
+} from '../utils/actions/supplementaryRequests';
 
 export const fetchUser = () => async (dispatch) => {
   try {
@@ -42,7 +47,7 @@ export const fetchTopics = (sectionId, setLoaded) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/sections/${sectionId}/topics`);
     dispatch({ type: types.FETCH_TOPICS_DATA, payload: response.data });
-    setLoaded(true);
+    setLoaded && setLoaded(true);
   } catch (err) {}
 };
 
@@ -69,10 +74,24 @@ export const fetchPosts = (sectionId, topicId, setLoaded) => async (dispatch) =>
   try {
     const response = await axios.get(`/api/sections/${sectionId}/topics/${topicId}/posts`);
     dispatch({ type: types.FETCH_POSTS_DATA, payload: response.data });
-    setLoaded(true);
+    setLoaded && setLoaded(true);
   } catch (err) {}
 };
 
 export const dropPosts = () => async (dispatch) => {
   dispatch({ type: types.DROP_POSTS_DATA });
+};
+
+export const deletePost = (sectionId, topicId, postId) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`/api/sections/${sectionId}/topics/${topicId}/posts/${postId}`);
+
+    if (response.status === 200) {
+      const user = response.data;
+      updateTopicPostsCount(sectionId, topicId, -1);
+      updateSectionPostsCount(sectionId, -1);
+      await updateUserPostsCount(user.name, -1);
+      fetchPosts(sectionId, topicId)(dispatch);
+    }
+  } catch (err) {}
 };

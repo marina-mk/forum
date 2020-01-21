@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const mapStateToProps = ({ user }) => ({ user });
 
-const requireAuth = (Component) => connect(mapStateToProps)((user, ...props) => {
+const requireAuth = (Component) => connect(mapStateToProps)(({ user, ...props }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
 
   useEffect(() => {

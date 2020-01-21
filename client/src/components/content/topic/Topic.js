@@ -23,7 +23,7 @@ const Topic = ({
     fetchCurrentSection(section);
     fetchCurrentTopic(section, topic);
     fetchPosts(section, topic, setLoaded);
-    updateTopicViews(section, topic);
+    updateTopicViews(section, topic, 1);
     return dropPosts;
   }, []);
 

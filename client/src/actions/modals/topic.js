@@ -7,7 +7,7 @@ export const setIsOpenedTopicForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_TOPIC_FORM_DATA });
 };
 
-export const submitData = (values, sectionId, setSending) => async (dispatch) => {
+export const submitData = (values, sectionId, username, setSending) => async (dispatch) => {
   setSending(true);
 
   try {
@@ -16,8 +16,8 @@ export const submitData = (values, sectionId, setSending) => async (dispatch) =>
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_TOPIC_FORM_DATA });
       fetchTopics(sectionId)(dispatch); // call subsequent action to fetch topics (method GET)
-      updateSectionTopicsCount(sectionId);
-      updateUserTopicsCount();
+      updateSectionTopicsCount(sectionId, 1);
+      updateUserTopicsCount(username, 1);
     }
   } catch (error) {
     dispatch({ type: types.SET_ERROR_TOPIC_FORM_DATA, payload: error.response.data });

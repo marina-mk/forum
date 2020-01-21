@@ -19,7 +19,7 @@ const PostInfo = ({ created, index, message }) => {
       </div>
       <RichTextMessage message={message} />
       <nav>
-        <DeleteButtonRequireAdmin />
+        <DeleteButtonRequireAdmin postIndex={index} />
       </nav>
     </div>
   );

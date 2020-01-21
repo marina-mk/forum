@@ -16,7 +16,7 @@ const handleOnPortalClick = (event, onClick) => {
 };
 
 const TopicDialog = ({
-  section, isOpened, error, handleSubmit,
+  user, section, isOpened, error, handleSubmit,
   submitData, closeForm,
 }) => {
   const [isSending, setSending] = useState(false);
@@ -24,7 +24,7 @@ const TopicDialog = ({
   const handleSubmittingData = (values) => {
     if (isSending) return;
 
-    submitData(values, section, setSending);
+    submitData(values, section, user.name, setSending);
   };
 
   return (
@@ -64,6 +64,7 @@ const TopicDialog = ({
 TopicDialog.defaultProps = {
   isOpened: false,
   error: null,
+  user: null,
 };
 
 TopicDialog.propTypes = {
@@ -73,10 +74,14 @@ TopicDialog.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitData: PropTypes.func.isRequired,
   closeForm: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
 };
 
-const mapStateToProps = ({ form }) => ({
+const mapStateToProps = ({ form, user }) => ({
   isOpened: form.topicForm ? form.topicForm.isOpened : false,
+  user,
 });
 
 export default reduxForm({ validate, form: 'topicForm' })(connect(mapStateToProps, mapDispatchToProps)(TopicDialog));

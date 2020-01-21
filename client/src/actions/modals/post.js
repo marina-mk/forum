@@ -19,7 +19,7 @@ export const updatePostFormEditorState = (editorState) => (dispatch) => {
   dispatch({ type: types.SET_UPDATED_POST_FORM_EDITOR_STATE, payload: editorState });
 };
 
-export const submitData = (data, sectionId, topicId, setSending) => async (dispatch) => {
+export const submitData = (data, sectionId, topicId, username, setSending) => async (dispatch) => {
   const values = { message: data };
 
   setSending(true);
@@ -29,9 +29,9 @@ export const submitData = (data, sectionId, topicId, setSending) => async (dispa
 
     if (response.status === 201) {
       dispatch({ type: types.SET_CLOSED_POST_FORM_DATA });
-      updateTopicPostsCount(sectionId, topicId);
-      updateSectionPostsCount(sectionId);
-      await updateUserPostsCount();
+      updateTopicPostsCount(sectionId, topicId, 1);
+      updateSectionPostsCount(sectionId, 1);
+      await updateUserPostsCount(username, 1);
       fetchPosts(sectionId, topicId)(dispatch); // call subsequent action to fetch posts (method GET)
     }
   } catch (error) {

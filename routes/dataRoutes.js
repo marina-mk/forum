@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const topicsPipeline = require('../logic/data/aggregation/topics');
 const postsPipeline = require('../logic/data/aggregation/posts');
 const requireAuth = require('../middlewares/requireAuth');
+const requireAdmin = require('../middlewares/requireAdmin');
 
 const User = mongoose.model('users');
 const Section = mongoose.model('sections');
@@ -40,17 +41,18 @@ module.exports = (app) => {
 
     app.patch('/api/sections/:sectionId', requireAuth, async (request, response) => {
         const { sectionId } = request.params;
+        const { topicsCount, postsCount } = request.body;
 
         try {
             const section = await Section.findOne({ name: sectionId });
 
             if (!section) {
                 response.status(404).send('Not found section with given id');
-            } else if (request.body.postsCount) {
-                await Section.updateOne({ _id: section._id }, { $inc: { "postsCount": 1 } });
+            } else if (postsCount) {
+                await Section.updateOne({ _id: section._id }, { $inc: { "postsCount": postsCount } });
                 response.sendStatus(200);
-            } else if (request.body.topicsCount) {
-                await Section.updateOne({ _id: section._id }, { $inc: { "topicsCount": 1 } });
+            } else if (topicsCount) {
+                await Section.updateOne({ _id: section._id }, { $inc: { "topicsCount": topicsCount } });
                 response.sendStatus(200);
             } else {
                 response.sendStatus(204);
@@ -119,6 +121,7 @@ module.exports = (app) => {
 
     app.patch('/api/sections/:sectionId/topics/:topicId', async (request, response) => {
         const { sectionId, topicId } = request.params;
+        const { postsCount, views } = request.body;
         const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
 
         try {
@@ -127,13 +130,13 @@ module.exports = (app) => {
 
             if (!topic) {
                 response.status(404).send('Not found topic with given id');
-            } else if (request.body.postsCount) {
+            } else if (postsCount) {
                 requireAuth(request, response, async () => {
-                    await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": 1 } });
+                    await Topic.updateOne({ _id: topic._id }, { $inc: { "postsCount": postsCount } });
                     response.sendStatus(200);
                 });
-            } else if (request.body.views) {
-                await Topic.updateOne({ _id: topic._id }, { $inc: { "views": 1 } });
+            } else if (views) {
+                await Topic.updateOne({ _id: topic._id }, { $inc: { "views": views } });
                 response.sendStatus(200);
             } else {
                 response.sendStatus(204);
@@ -179,6 +182,24 @@ module.exports = (app) => {
             response.sendStatus(201);
         } catch (err) {
             response.status(422).send('Ошибка во время создания нового сообщения. Пожалуйста, повторите попытку позже.');
+        }
+    });
+
+    app.delete('/api/sections/:sectionId/topics/:topicId/posts/:postId', requireAuth, requireAdmin, async (request, response) => {
+        const { sectionId, topicId, postId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1;
+        const postIndex = +postId.slice(5) - 1;
+
+        try {
+            const user = await User.findOne({ email: request.email });
+            const section = await Section.findOne({ name: sectionId });
+            const topic = await Topic.findOne({ _section: section._id, index: topicIndex }, { "title": 1, "index": 1 });
+            const post = await Post.findOne({ _topic: topic._id, index: postIndex });
+
+            await post.remove();
+            response.status(200).send({ name: user.name });
+        } catch (err) {
+            response.status(500).send('Internal server error occurred while deleting a post');
         }
     });
 };

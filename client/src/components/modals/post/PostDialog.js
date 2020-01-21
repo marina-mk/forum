@@ -17,7 +17,7 @@ const handleOnPortalClick = (event, onClick) => {
 };
 
 const PostDialog = ({
-  section, topic, isOpened, closeForm, error, richTextEditorState, submitData, updatePostFormError,
+  user, section, topic, isOpened, closeForm, error, richTextEditorState, submitData, updatePostFormError,
 }) => {
   const [isSending, setSending] = useState(false);
 
@@ -34,7 +34,7 @@ const PostDialog = ({
     const currentContent = richTextEditorState.getCurrentContent();
     const rawData = convertToRaw(currentContent);
     const htmlData = draftToHtml(rawData);
-    submitData(htmlData, section, topic, setSending);
+    submitData(htmlData, section, topic, user.name, setSending);
   };
 
   return (
@@ -74,6 +74,7 @@ PostDialog.defaultProps = {
   isOpened: false,
   error: null,
   richTextEditorState: EditorState.createEmpty(),
+  user: null,
 };
 
 PostDialog.propTypes = {
@@ -87,12 +88,16 @@ PostDialog.propTypes = {
   }),
   submitData: PropTypes.func.isRequired,
   updatePostFormError: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
 };
 
-const mapStateToProps = ({ form }) => ({
+const mapStateToProps = ({ form, user }) => ({
   isOpened: form.postForm ? form.postForm.isOpened : false,
   error: form.postForm ? form.postForm.error : null,
   richTextEditorState: form.postForm ? form.postForm.richTextEditorState : EditorState.createEmpty(),
+  user,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDialog);
