@@ -1,9 +1,4 @@
 #root {
-  .breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   .breadcrumbs a {
     padding: .5rem 0;
     color: $highlight;
@@ -20,5 +15,11 @@
     padding: 0 10px;
     vertical-align: middle;
     font-weight: 400;
+  }
+
+  @media (max-width: 576px) {
+    .breadcrumbs {
+      margin-bottom: 1rem;
+    }
   }
 }
