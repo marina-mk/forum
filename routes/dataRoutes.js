@@ -196,6 +196,10 @@ module.exports = (app) => {
             const topic = await Topic.findOne({ _section: section._id, index: topicIndex }, { "title": 1, "index": 1 });
             const post = await Post.findOne({ _topic: topic._id, index: postIndex });
 
+            if (!post) {
+                response.status(404).send('Not found post with given id');
+            }
+
             await post.remove();
             response.status(200).send({ name: user.name });
         } catch (err) {
