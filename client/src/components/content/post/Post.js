@@ -4,16 +4,17 @@ import UserInfo from './UserInfo';
 import PostInfo from './PostInfo';
 
 const Post = ({
-  author, created, index, message,
+  author, created, postIndex, displayedIndex, message,
 }) => (
   <>
     <UserInfo author={author} />
-    <PostInfo created={created} index={index} message={message} />
+    <PostInfo created={created} postIndex={postIndex} displayedIndex={displayedIndex} message={message} />
   </>
 );
 
 Post.propTypes = {
-  index: PropTypes.number.isRequired,
+  postIndex: PropTypes.number.isRequired,
+  displayedIndex: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   author: PropTypes.shape({

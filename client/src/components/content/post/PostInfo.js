@@ -7,9 +7,11 @@ import requireAdmin from '../../utils/requireAdmin';
 
 const DeleteButtonRequireAdmin = requireAdmin(DeleteButton);
 
-const PostInfo = ({ created, index, message }) => {
+const PostInfo = ({
+  created, postIndex, displayedIndex, message,
+}) => {
   const publishedInfoStr = formatPostPublishedInfo(created);
-  const numInfoStr = formatPostNumInfo(index);
+  const numInfoStr = formatPostNumInfo(displayedIndex);
 
   return (
     <div className="postBody col-sm-10">
@@ -19,14 +21,15 @@ const PostInfo = ({ created, index, message }) => {
       </div>
       <RichTextMessage message={message} />
       <nav>
-        <DeleteButtonRequireAdmin postIndex={index} />
+        <DeleteButtonRequireAdmin postIndex={postIndex} />
       </nav>
     </div>
   );
 };
 
 PostInfo.propTypes = {
-  index: PropTypes.number.isRequired,
+  postIndex: PropTypes.number.isRequired,
+  displayedIndex: PropTypes.number.isRequired,
   created: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
 };

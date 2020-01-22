@@ -5,10 +5,10 @@ import Post from '../post/Post';
 
 const renderPosts = (posts) => posts.map(({
   _id, index, message, created, author,
-}) => (
+}, i) => (
   <tr key={_id}>
     <td className="row">
-      <Post author={author} created={created} index={index} message={message} />
+      <Post author={author} created={created} postIndex={index} displayedIndex={i} message={message} />
     </td>
   </tr>
 ));
