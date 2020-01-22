@@ -5,9 +5,7 @@ export const setIsOpenedLoginForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_LOGIN_FORM_DATA });
 };
 
-export const submitAuthData = (values, path, setSending) => async (dispatch) => {
-  setSending(true);
-
+export const submitAuthData = (values, path) => async (dispatch) => {
   try {
     const response = await axios.post(path, values);
 
@@ -17,8 +15,6 @@ export const submitAuthData = (values, path, setSending) => async (dispatch) => 
     }
   } catch (error) {
     dispatch({ type: types.SET_ERROR_LOGIN_FORM_DATA, payload: error.response.data });
-  } finally {
-    setSending(false);
   }
 };
 

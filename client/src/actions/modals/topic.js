@@ -7,9 +7,7 @@ export const setIsOpenedTopicForm = () => (dispatch) => {
   dispatch({ type: types.SET_OPENED_TOPIC_FORM_DATA });
 };
 
-export const submitData = (values, sectionId, username, setSending) => async (dispatch) => {
-  setSending(true);
-
+export const submitData = (values, sectionId, username) => async (dispatch) => {
   try {
     const response = await axios.post(`/api/sections/${sectionId}/topics`, values);
 
@@ -21,8 +19,6 @@ export const submitData = (values, sectionId, username, setSending) => async (di
     }
   } catch (error) {
     dispatch({ type: types.SET_ERROR_TOPIC_FORM_DATA, payload: error.response.data });
-  } finally {
-    setSending(false);
   }
 };
 

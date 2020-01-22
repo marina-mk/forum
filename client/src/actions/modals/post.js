@@ -19,10 +19,8 @@ export const updatePostFormEditorState = (editorState) => (dispatch) => {
   dispatch({ type: types.SET_UPDATED_POST_FORM_EDITOR_STATE, payload: editorState });
 };
 
-export const submitData = (data, sectionId, topicId, username, setSending) => async (dispatch) => {
+export const submitData = (data, sectionId, topicId, username) => async (dispatch) => {
   const values = { message: data };
-
-  setSending(true);
 
   try {
     const response = await axios.post(`/api/sections/${sectionId}/topics/${topicId}/posts`, values);
@@ -36,8 +34,6 @@ export const submitData = (data, sectionId, topicId, username, setSending) => as
     }
   } catch (error) {
     dispatch({ type: types.SET_ERROR_POST_FORM_DATA, payload: error.response.data });
-  } finally {
-    setSending(false);
   }
 };
 

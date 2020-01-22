@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
@@ -6,12 +6,18 @@ import * as actions from '../../../actions';
 const DeleteButton = ({
   currentSection, currentTopic, postIndex, deletePost,
 }) => {
+  const [isSending, setSending] = useState(false);
+
   const handleOnclick = () => {
+    if (isSending) return;
+
     const sectionId = currentSection.name;
     const topicId = `topic-${currentTopic.index + 1}`;
     const postId = `post-${postIndex + 1}`;
 
+    setSending(true);
     deletePost(sectionId, topicId, postId);
+    setSending(false);
   };
 
   return (

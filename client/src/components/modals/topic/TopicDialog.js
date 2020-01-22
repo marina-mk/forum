@@ -24,7 +24,9 @@ const TopicDialog = ({
   const handleSubmittingData = (values) => {
     if (isSending) return;
 
-    submitData(values, section, user.name, setSending);
+    setSending(true);
+    submitData(values, section, user.name);
+    setSending(false);
   };
 
   return (

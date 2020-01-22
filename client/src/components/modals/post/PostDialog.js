@@ -24,6 +24,7 @@ const PostDialog = ({
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isSending) return;
+
     const validationError = validate({ richTextEditorState });
 
     if (validationError) {
@@ -34,7 +35,10 @@ const PostDialog = ({
     const currentContent = richTextEditorState.getCurrentContent();
     const rawData = convertToRaw(currentContent);
     const htmlData = draftToHtml(rawData);
-    submitData(htmlData, section, topic, user.name, setSending);
+
+    setSending(true);
+    submitData(htmlData, section, topic, user.name);
+    setSending(false);
   };
 
   return (

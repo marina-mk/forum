@@ -26,7 +26,9 @@ const AuthDialog = ({
   const handleSubmittingData = (values) => {
     if (isSending) return;
 
-    submitAuthData(values, action, setSending);
+    setSending(true);
+    submitAuthData(values, action);
+    setSending(false);
   };
 
   return (
