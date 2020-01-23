@@ -102,9 +102,9 @@ export const deleteTopic = (sectionId, topicId) => async (dispatch) => {
 
     if (response.status === 200) {
       const user = response.data;
-      updateSectionTopicsCount(sectionId, -1);
-      await updateUserTopicsCount(user.name, -1);
       fetchTopics(sectionId)(dispatch);
+      updateSectionTopicsCount(sectionId, -1);
+      updateUserTopicsCount(user.name, -1);
     }
   } catch (err) {}
 };

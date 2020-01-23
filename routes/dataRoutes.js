@@ -146,6 +146,26 @@ module.exports = (app) => {
         }
     });
 
+    app.delete('/api/sections/:sectionId/topics/:topicId', requireAuth, requireAdmin, async (request, response) => {
+        const { sectionId, topicId } = request.params;
+        const topicIndex = +topicId.slice(6) - 1;
+
+        try {
+            const user = await User.findOne({ email: request.email });
+            const section = await Section.findOne({ name: sectionId });
+            const topic = await Topic.findOne({ _section: section._id, index: topicIndex });
+
+            if (!topic) {
+                response.status(404).send('Not found topic with given id');
+            }
+
+            await topic.remove();
+            response.status(200).send({ name: user.name });
+        } catch (err) {
+            response.status(500).send('Internal server error occurred while deleting a topic');
+        }
+    });
+
     app.get('/api/sections/:sectionId/topics/:topicId/posts', async (request, response) => {
         const { sectionId, topicId } = request.params;
         const topicIndex = +topicId.slice(6) - 1; // Cut topic index from stringId of the form "topic-1"
