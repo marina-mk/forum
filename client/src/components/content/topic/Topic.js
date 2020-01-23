@@ -20,10 +20,13 @@ const Topic = ({
   const [isLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    fetchCurrentSection(section);
-    fetchCurrentTopic(section, topic);
-    fetchPosts(section, topic, setLoaded);
-    updateTopicViews(section, topic, 1);
+    (async () => {
+      fetchCurrentSection(section);
+      fetchCurrentTopic(section, topic);
+      await fetchPosts(section, topic);
+      setLoaded(true);
+      updateTopicViews(section, topic, 1);
+    })();
     return dropPosts;
   }, []);
 

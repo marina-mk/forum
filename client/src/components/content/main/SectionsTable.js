@@ -15,17 +15,19 @@ const renderSections = (sections) => sections.map(({
   return (
     <tr key={_id}>
       <td>
-        <div className="info">
+        <div className="section_description">
           <Link to={`/${name}`} className="title">{title}</Link>
           <div className="description">{description}</div>
         </div>
-        <div className="counts">
-          <div>
-            <span>{topicsCountStr}</span>
-            <span>&nbsp;</span>
-          </div>
-          <div>
-            <span>{postsCountStr}</span>
+        <div className="section_info">
+          <div className="counts">
+            <div>
+              <span>{topicsCountStr}</span>
+              <span>&nbsp;</span>
+            </div>
+            <div>
+              <span>{postsCountStr}</span>
+            </div>
           </div>
         </div>
       </td>

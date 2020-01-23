@@ -19,9 +19,12 @@ const Section = ({
   const [isLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    dropCurrentTopic();
-    fetchCurrentSection(section);
-    fetchTopics(section, setLoaded);
+    (async () => {
+      dropCurrentTopic();
+      fetchCurrentSection(section);
+      await fetchTopics(section);
+      setLoaded(true);
+    })();
     return dropTopics;
   }, []);
 

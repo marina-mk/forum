@@ -1,37 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import TopicEntry from './TopicEntry';
 import * as actions from '../../../actions';
-import { formatPostsCount, formatTopicInfo, formatTopicViews } from '../../../utils/helpers/formatters';
 
 const renderTopics = (section, topics) => topics.map(({
   _id, index, title, description, created, author, postsCount, views,
-}) => {
-  const topicInfoStr = formatTopicInfo(created, author);
-  const postsCountStr = formatPostsCount(postsCount);
-  const topicViewsStr = formatTopicViews(views);
-
-  return (
-    <tr key={_id}>
-      <td>
-        <div className="info">
-          <Link to={`/${section}/topic-${index + 1}`} className="title">{title}</Link>
-          <div className="description">{description}</div>
-          <div className="topicInfo">{topicInfoStr}</div>
-        </div>
-        <div className="counts">
-          <div>
-            <span>{postsCountStr}</span>
-            <span>&nbsp;</span>
-          </div>
-          <div>{topicViewsStr}</div>
-        </div>
-      </td>
-    </tr>
-  );
-});
+}) => (
+  <tr key={_id}>
+    <td>
+      <TopicEntry
+        section={section}
+        index={index}
+        title={title}
+        description={description}
+        created={created}
+        author={author}
+        postsCount={postsCount}
+        views={views}
+      />
+    </td>
+  </tr>
+));
 
 const TopicsTable = ({ section, topics }) => (
   <div className="table-responsive">
@@ -52,7 +43,9 @@ TopicsTable.propTypes = {
     created: PropTypes.string.isRequired,
     author: PropTypes.shape({
       name: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
+    postsCount: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
   })).isRequired,
 };
 
